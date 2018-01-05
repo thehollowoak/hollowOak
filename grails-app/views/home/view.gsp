@@ -6,12 +6,13 @@
     <asset:stylesheet src="application.css"/>
 </head>
 <body class="container">
-    <div class="row">
-        <div class="col-sm-3">
-            <g:link action="view" id="${item.id}">
-                <asset:image src="${item.img}" alt="${item.name}" height="200"/>
-            </g:link>
-            <p> ${item.name} </p>
+    <div class="row well well-lg">
+        <div class="col-sm-6">
+            <asset:image src="${item.img}" alt="${item.name}" width="100%"/>
+        </div>
+        <div class="col-sm-6">
+            <h1> ${item.name} </h1>
+            <p> description </p>
         </div>
     </div>
 </body>
