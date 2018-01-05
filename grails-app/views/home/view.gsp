@@ -12,7 +12,8 @@
         </div>
         <div class="col-sm-6">
             <h1> ${item.name} </h1>
-            <p> description </p>
+            <br/>
+            <p> ${item.description} </p>
         </div>
     </div>
 </body>

@@ -6,13 +6,15 @@
     <asset:stylesheet src="application.css"/>
 </head>
 <body class="container">
-    <div class="row">
-        <div class="col-sm-3">
+    <div class="row well well-lg">
+        <g:each var="item" in="${items}">
+        <div class="col-sm-4">
             <g:link action="view" id="${item.id}">
-                <asset:image src="${item.img}" alt="${item.name}" height="200"/>
+                <asset:image src="${item.img}" alt="${item.name}" width="100%"/>
             </g:link>
             <p> ${item.name} </p>
         </div>
+        </g:each>
     </div>
 </body>
 </html>
