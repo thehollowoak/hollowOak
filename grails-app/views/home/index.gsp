@@ -6,6 +6,7 @@
     <asset:stylesheet src="application.css"/>
 </head>
 <body class="container">
+    <g:render template="nav" />
     <div class="row well well-lg">
         <g:each var="item" in="${items}">
         <div class="col-sm-4">

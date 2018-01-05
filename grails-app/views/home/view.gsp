@@ -6,6 +6,7 @@
     <asset:stylesheet src="application.css"/>
 </head>
 <body class="container">
+    <g:render template="nav" />
     <div class="row well well-lg">
         <div class="col-sm-6">
             <asset:image src="${item.img}" alt="${item.name}" width="100%"/>
