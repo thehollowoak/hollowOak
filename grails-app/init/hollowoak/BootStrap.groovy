@@ -13,9 +13,9 @@ class BootStrap {
             "I also added a tribal Eevee to one of the pockets, because I wanted to. If you " +
             "want a different Pokemon, just ask! Or if you want different colors. Whatever."
 
-        new Item(name: "Tardis Bag", img: "tardis.jpg", description: tardis_description).save()
-        new Item(name: "BMO Bag", img: "bmo.jpg", description: bmo_description).save()
-        new Item(name: "Pokemon Trainer Bag", img: "trainer.jpg", description: trainer_description).save()
+        new Item(name: "Tardis Bag", img: "tardis.jpg", price: 18, description: tardis_description).save()
+        new Item(name: "BMO Bag", img: "bmo.jpg", price: 18, description: bmo_description).save()
+        new Item(name: "Pokemon Trainer Bag", img: "trainer.jpg", price: 22, description: trainer_description).save()
 
     }
     def destroy = {

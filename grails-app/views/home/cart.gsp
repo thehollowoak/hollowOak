@@ -12,12 +12,17 @@
             <g:each var="item" in="${items}">
             <tr>
                 <td> ${item.name} </td>
-                <td> <g:link action="minusOne" id="${item.id}" class="btn btn-primary"> - </g:link>
-                <td> ${session.items["${item.id}"]} </td>
-                <td> <g:link action="plusOne" id="${item.id}" class="btn btn-primary"> + </g:link>
+                <td> 
+                    <g:link action="minusOne" id="${item.id}"> - </g:link>
+                    ${session.items["${item.id}"]}
+                    <g:link action="plusOne" id="${item.id}"> + </g:link>
+                </td>
+                <td> ${item.price} </td>
+                <td> ${item.price * session.items["${item.id}"]} </td>
             </tr>
             </g:each>
         </table>
+        <div class="right"> Total: ${total} </div>
     </div>
 </body>
 </html>

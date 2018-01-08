@@ -14,7 +14,8 @@ class HomeController {
 
     def cart() {
         def items = Item.findAllByIdInList(session.items?.keySet())
-        render(view: 'cart', model: [items: items])
+        def totalPrice = getTotalPrice()
+        render(view: 'cart', model: [items: items, total: totalPrice])
     }
 
     def addToCart() {
@@ -44,5 +45,13 @@ class HomeController {
             session.items.remove(params.id)
         } 
         redirect(action: 'cart')
+    }
+
+    def getTotalPrice() {
+        def total = 0
+        session.items.each { id, amount ->
+            total += Item.findById(id).price * amount
+        }
+        return total
     }
 }

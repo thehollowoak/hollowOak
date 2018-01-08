@@ -33,7 +33,7 @@
     width: 80%;
     transition: .5s ease;
 }
-.pic img:hover{
+.pic img:hover {
     margin: 0;
     width: 100%;
     transition: .5s ease;
@@ -45,4 +45,12 @@
 
 .cart {
     padding: 10px;
+}
+
+tr:hover {
+    background-color: white;
+}
+
+.right {
+    text-align: right;
 }

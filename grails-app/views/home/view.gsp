@@ -13,11 +13,9 @@
         </div>
         <div class="col-sm-6">
             <h1> ${item.name} </h1>
-            <br/>
-            <p> ${item.description} </p>
-            <br/>
-            <g:link action="addToCart" id="${item.id}" class="btn btn-primary"> Add to cart </g:link>
-            <br/>
+            <h3> $${item.price} <h3> <br/>
+            <p> ${item.description} </p> <br/>
+            <g:link action="addToCart" id="${item.id}" class="btn btn-primary"> Add to cart </g:link> <br/>
             <p> ${flash.message} </p>
         </div>
     </div>
