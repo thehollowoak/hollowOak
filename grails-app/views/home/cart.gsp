@@ -7,16 +7,9 @@
 </head>
 <body class="container">
     <g:render template="nav" />
-    <div class="row well well-lg">
+    <div class="row well well-lg cart">
         <g:each var="item" in="${items}">
-        <div class="col-sm-4">
-            <span class="pic">
-                <g:link action="view" id="${item.id}">
-                    <asset:image src="${item.img}" alt="${item.name}" width="100%"/>
-                </g:link>
-                <p> ${item.name} </p>
-            </span>
-        </div>
+            <p> ${item.name} | ${session.items["${item.id}"]}</p>
         </g:each>
     </div>
 </body>

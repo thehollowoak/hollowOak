@@ -13,16 +13,21 @@ class HomeController {
     }
 
     def cart() {
-        def items = session.items
+        def items = Item.findAllByIdInList(session.items.keySet())
         render(view: 'cart', model: [items: items])
     }
 
     def addToCart() {
         if (session.items) {
-            session.items += Item.findById(params.id)
+            if (session.items.containsKey(params.id)) {
+                session.items[params.id] += 1
+            }
+            else {
+                session.items[params.id] = 1
+            }
         }
         else {
-            session.items = [Item.findById(params.id)]
+            session.items = [(params.id):1]
         }
         flash.message = "Item added to cart"
         redirect(action: 'view', params: [id: params.id])
