@@ -13,7 +13,7 @@ class HomeController {
     }
 
     def cart() {
-        def items = Item.findAllByIdInList(session.items.keySet())
+        def items = Item.findAllByIdInList(session.items?.keySet())
         render(view: 'cart', model: [items: items])
     }
 
@@ -31,5 +31,18 @@ class HomeController {
         }
         flash.message = "Item added to cart"
         redirect(action: 'view', params: [id: params.id])
+    }
+
+    def plusOne() {
+        session.items[params.id] += 1
+        redirect(action: 'cart')
+    }
+
+    def minusOne() {
+        session.items[params.id] -= 1
+        if (session.items[params.id] <= 0) {
+            session.items.remove(params.id)
+        } 
+        redirect(action: 'cart')
     }
 }
