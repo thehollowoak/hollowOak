@@ -10,10 +10,12 @@
     <div class="row well well-lg">
         <g:each var="item" in="${items}">
         <div class="col-sm-4">
-            <g:link action="view" id="${item.id}">
-                <asset:image src="${item.img}" alt="${item.name}" width="100%"/>
-            </g:link>
-            <p> ${item.name} </p>
+            <span class="pic">
+                <g:link action="view" id="${item.id}">
+                    <asset:image src="${item.img}" alt="${item.name}" width="100%"/>
+                </g:link>
+                <p> ${item.name} </p>
+            </span>
         </div>
         </g:each>
     </div>

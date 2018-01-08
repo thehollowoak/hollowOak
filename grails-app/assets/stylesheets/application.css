@@ -23,3 +23,18 @@
 .nav {
     background-color: darkgray;
 }
+
+.pic {
+    text-align: center;
+}
+.pic img {
+    display: block;
+    margin: 10%;
+    width: 80%;
+    transition: .5s ease;
+}
+.pic img:hover{
+    margin: 0;
+    width: 100%;
+    transition: .5s ease;
+}
