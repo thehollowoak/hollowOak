@@ -12,14 +12,25 @@
 *= require_self
 */
 
+body {
+    padding-top: 60px;
+    background-color: lightsteelblue;
+    font-size: 2em;
+}
+
+h1, .center, .pic {
+    text-align: center;
+}
+
 .well {
     padding: 15px 0px;
     margin-top: 15px;
 }
 
-.pic {
-    text-align: center;
+.well, table tr:hover {
+    background-color: #eee;
 }
+
 .pic img {
     display: block;
     margin: 10%;
@@ -28,8 +39,13 @@
 }
 .pic img:hover {
     margin: 0;
+    margin-bottom: 4%;
     width: 100%;
     transition: .5s ease;
+}
+img {
+    border-radius: 25px;
+    border: thin solid black;
 }
 
 .btn {
