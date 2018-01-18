@@ -14,8 +14,9 @@ class AdminController {
         }
     }
 
+    def newItem() {}
 
-
+    
 
 
 
