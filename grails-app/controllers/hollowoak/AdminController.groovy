@@ -30,7 +30,22 @@ class AdminController {
         redirect(controller: 'home', action: 'index')
     }
 
-    
+    def deleteItem() {
+        Item.get(params.id).delete(flush: true)
+        redirect(controller: 'home', action: 'index')
+    }
+
+    def editItem() {
+        def item = Item.get(params.id)
+        render(view: 'editItem', model: [item: item])
+    }
+
+    def update() {
+        def item = Item.get(params.id)
+        item.properties = params
+        item.save(flush: true)
+        redirect(controller: 'home', action: 'view', id: item.id)
+    }    
 
 
 

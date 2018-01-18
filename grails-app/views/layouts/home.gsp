@@ -33,6 +33,10 @@
                     <li> <g:link controller="home" action="cart"> Cart </g:link> </li>
                     <g:if test="${session.admin}">
                         <li> <g:link controller="admin" action="newItem"> New </g:link> </li>
+                        <g:if test="${item}">
+                            <li> <g:link controller="admin" action="editItem" id="${item.id}"> Edit </g:link> </li>
+                            <li> <g:link controller="admin" action="deleteItem" id="${item.id}"> Delete </g:link> </li>
+                        </g:if>
                         <li> <g:link controller="admin" action="logout"> Logout </g:link> </li>
                     </g:if>
                 </ul>
