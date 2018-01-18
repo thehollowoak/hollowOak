@@ -33,6 +33,7 @@
                     <li> <g:link controller="home" action="cart"> Cart </g:link> </li>
                     <g:if test="${session.admin}">
                         <li> <g:link controller="admin" action="newItem"> New </g:link> </li>
+                        <li> <g:link controller="admin" action="logout"> Logout </g:link> </li>
                     </g:if>
                 </ul>
             </div>

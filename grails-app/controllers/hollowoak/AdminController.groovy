@@ -14,7 +14,21 @@ class AdminController {
         }
     }
 
-    def newItem() {}
+    def logout() {
+        session.removeValue('admin')
+        redirect(controller: 'home', action: 'index')
+    }
+
+    def newItem() {
+        if (!session.admin) {
+            redirect(controller: 'home', action: 'index')
+        }
+     }
+
+    def create() {
+        new Item(params).save()
+        redirect(controller: 'home', action: 'index')
+    }
 
     
 
