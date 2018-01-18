@@ -2,6 +2,8 @@ package hollowoak
 
 class HomeController {
 
+    // Items
+
     def index() { 
         def items = Item.findAll()
         render(view: 'index', model: [items: items])
@@ -11,6 +13,12 @@ class HomeController {
         def item = Item.findById(params.id)
         render(view: 'view', model: [item: item])
     }
+
+    // About
+
+    def about() { }
+
+    // Cart
 
     def cart() {
         def items = Item.findAllByIdInList(session.items?.keySet())
