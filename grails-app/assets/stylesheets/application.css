@@ -34,10 +34,6 @@ h1, .center, .pic {
     background-color: #eee;
 }
 
-.btn {
-    text-decoration: none;
-}
-
 /* Pictures */
 
 .pic img {
@@ -52,9 +48,14 @@ h1, .center, .pic {
     width: 100%;
     transition: .5s ease;
 }
+
 img {
     border-radius: 25px;
     border: thin solid black;
+}
+
+#viewPic {
+    margin-bottom: 10px;
 }
 
 /* Cart */
