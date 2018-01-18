@@ -22,14 +22,23 @@ h1, .center, .pic {
     text-align: center;
 }
 
+.right {
+    text-align: right;
+}
+
 .well {
     padding: 15px 0px;
     margin-top: 15px;
 }
-
-.well, table tr:hover {
+.well {
     background-color: #eee;
 }
+
+.btn {
+    text-decoration: none;
+}
+
+/* Pictures */
 
 .pic img {
     display: block;
@@ -48,18 +57,19 @@ img {
     border: thin solid black;
 }
 
-.btn {
-    text-decoration: none;
-}
+/* Cart */
 
 .cart {
     padding: 10px;
 }
 
-tr:hover {
-    background-color: white;
-}
 
-.right {
-    text-align: right;
+/* Fix Bootstrap */
+
+.navbar-brand {
+    float: left;
+    width: 230px;
+    height: 70px;
+    font-size: 1.3em;
+    line-height: 70px;
 }
