@@ -13,7 +13,7 @@
 */
 
 body {
-    padding-top: 60px;
+    padding-top: 65px;
     background-color: lightsteelblue;
     font-size: 2em;
 }
@@ -63,6 +63,14 @@ img {
     padding: 10px;
 }
 
+/* Forms */
+
+form {
+    padding: 20px 0;
+}
+form div {
+    padding-bottom: 15px;
+}
 
 /* Fix Bootstrap */
 
