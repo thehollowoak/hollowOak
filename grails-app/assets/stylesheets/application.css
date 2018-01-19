@@ -26,6 +26,10 @@ h1, .center, .pic {
     text-align: right;
 }
 
+.hidden {
+    display: none;
+}
+
 .well {
     padding: 15px 0px;
     margin-top: 15px;
@@ -54,7 +58,7 @@ img {
     border: thin solid black;
 }
 
-#viewPic {
+.viewPic {
     margin-bottom: 10px;
 }
 
