@@ -15,17 +15,17 @@ class BootStrap {
         def companion_description = 'Take this friendly cube with you wherever you go! ' +
             'It will hold your stuff while protecting you from turrets. Made with duct tape ' +
             'and covered with clear tape to prevent wear. The bag is about 10"x10"x2".'
+        def majora_description = "It's Majora's Mask from Legond of Zelda. It's so cool."
 
         def tardis = new Item(name: "Tardis Bag", price: 18, description: tardis_description).save()
         def bmo = new Item(name: "BMO Bag", price: 18, description: bmo_description).save()
         def trainer = new Item(name: "Pokemon Trainer Bag", price: 22, description: trainer_description).save()
         def cube = new Item(name: "Companion Cube Bag", price: 18, description: companion_description).save()
+        def mask = new Item(name: "Majora's Mask Bag", price: 22, description: majora_description).save()
 
         new Pic(file: "tardis_small.jpg", itemId: tardis.id, priority: 2).save()
         new Pic(file: "tardis_full.jpg", itemId: tardis.id, priority: 1).save()
-        new Pic(file: "companion_cube.jpg", itemId: tardis.id, priority: 3).save()
-        new Pic(file: "majoras_mask.jpg", itemId: tardis.id, priority: 4).save()
-        new Pic(file: "bmo.jpg", itemId: tardis.id, priority: 5).save()
+        new Pic(file: "majoras_mask.jpg", itemId: mask.id, priority: 1).save()
         new Pic(file: "bmo.jpg", itemId: bmo.id, priority: 1).save()
         new Pic(file: "trainer.jpg", itemId: trainer.id, priority: 1).save()
         new Pic(file: "companion_cube.jpg", itemId: cube.id, priority: 1).save()
