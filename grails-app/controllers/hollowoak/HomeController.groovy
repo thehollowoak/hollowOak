@@ -6,12 +6,14 @@ class HomeController {
 
     def index() { 
         def items = Item.findAll()
-        render(view: 'index', model: [items: items])
+        def pics = Pic.findAllByPriority(1)
+        render(view: 'index', model: [items: items, pics: pics])
     }
 
     def view() {
         def item = Item.findById(params.id)
-        render(view: 'view', model: [item: item])
+        def pics = Pic.findAllByItemId(params.id)
+        render(view: 'view', model: [item: item, pics: pics])
     }
 
     // About

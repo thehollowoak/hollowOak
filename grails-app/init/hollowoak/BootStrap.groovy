@@ -12,10 +12,23 @@ class BootStrap {
         def trainer_description = "Based off the trainer's bag in Pokemon Black and White! " +
             "I also added a tribal Eevee to one of the pockets, because I wanted to. If you " +
             "want a different Pokemon, just ask! Or if you want different colors. Whatever."
+        def companion_description = 'Take this friendly cube with you wherever you go! ' +
+            'It will hold your stuff while protecting you from turrets. Made with duct tape ' +
+            'and covered with clear tape to prevent wear. The bag is about 10"x10"x2".'
 
-        new Item(name: "Tardis Bag", img: "tardis.jpg", img1: "tardis.jpg", img2: "bmo.jpg", img3: "tardis.jpg", img4: "trainer.jpg", img5: "tardis.jpg", price: 18, description: tardis_description).save()
-        new Item(name: "BMO Bag", img: "bmo.jpg", img1: "bmo.jpg", img2: "bmo.jpg", img3: "bmo.jpg", img4: "bmo.jpg", img5: "bmo.jpg", price: 18, description: bmo_description).save()
-        new Item(name: "Pokemon Trainer Bag", img: "trainer.jpg", img1: "trainer.jpg", img2: "trainer.jpg", img3: "trainer.jpg", img4: "trainer.jpg", img5: "trainer.jpg", price: 22, description: trainer_description).save()
+        def tardis = new Item(name: "Tardis Bag", price: 18, description: tardis_description).save()
+        def bmo = new Item(name: "BMO Bag", price: 18, description: bmo_description).save()
+        def trainer = new Item(name: "Pokemon Trainer Bag", price: 22, description: trainer_description).save()
+        def cube = new Item(name: "Companion Cube Bag", price: 18, description: companion_description).save()
+
+        new Pic(file: "tardis_small.jpg", itemId: tardis.id, priority: 2).save()
+        new Pic(file: "tardis_full.jpg", itemId: tardis.id, priority: 1).save()
+        new Pic(file: "companion_cube.jpg", itemId: tardis.id, priority: 3).save()
+        new Pic(file: "majoras_mask.jpg", itemId: tardis.id, priority: 4).save()
+        new Pic(file: "bmo.jpg", itemId: tardis.id, priority: 5).save()
+        new Pic(file: "bmo.jpg", itemId: bmo.id, priority: 1).save()
+        new Pic(file: "trainer.jpg", itemId: trainer.id, priority: 1).save()
+        new Pic(file: "companion_cube.jpg", itemId: cube.id, priority: 1).save()
 
     }
     def destroy = {

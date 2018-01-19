@@ -20,35 +20,9 @@ if (typeof jQuery !== 'undefined') {
     })(jQuery);
 }
 
-$(document).ready(function() {
-    $("#btn1").click(function(event) {
-        $(".viewPic").addClass("hidden");
-        $("#pic1").removeClass("hidden");
-        $(".btn-info").removeClass("active");
-        $("#btn1").addClass("active");
-    });
-    $("#btn2").click(function(event) {
-        $(".viewPic").addClass("hidden");
-        $("#pic2").removeClass("hidden");
-        $(".btn-info").removeClass("active");
-        $("#btn2").addClass("active");
-    });
-    $("#btn3").click(function(event) {
-        $(".viewPic").addClass("hidden");
-        $("#pic3").removeClass("hidden");
-        $(".btn-info").removeClass("active");
-        $("#btn3").addClass("active");
-    });
-    $("#btn4").click(function(event) {
-        $(".viewPic").addClass("hidden");
-        $("#pic4").removeClass("hidden");
-        $(".btn-info").removeClass("active");
-        $("#btn4").addClass("active");
-    });
-    $("#btn5").click(function(event) {
-        $(".viewPic").addClass("hidden");
-        $("#pic5").removeClass("hidden");
-        $(".btn-info").removeClass("active");
-        $("#btn5").addClass("active");
-    });
-});
+function changePic(num) {
+    $(".viewPic").addClass("hidden");
+    $("#pic"+num).removeClass("hidden");
+    $(".btn-info").removeClass("active");
+    $("#btn"+num).addClass("active");
+}

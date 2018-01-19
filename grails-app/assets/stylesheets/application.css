@@ -44,18 +44,16 @@ h1, .center, .pic {
     display: block;
     margin: 10%;
     width: 80%;
-    transition: .5s ease;
 }
 .pic img:hover {
     margin: 0;
-    margin-bottom: 4%;
     width: 100%;
-    transition: .5s ease;
 }
 
 img {
     border-radius: 25px;
     border: thin solid black;
+    transition: .5s ease;
 }
 
 .viewPic {

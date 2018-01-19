@@ -6,7 +6,7 @@
         <g:while test="${i < items.size()}">
         <span class="pic">
             <g:link action="view" id="${items[i].id}">
-                <asset:image src="${items[i].img}" alt="${items[i].name}" width="100%"/>
+                <asset:image src="${(pics.find {it.itemId == items[i].id}).file}" alt="${items[i].name}" width="100%"/>
             </g:link>
             <p> ${items[i].name} </p>
         </span>
@@ -15,3 +15,4 @@
     </div>
     </g:each>
 </div>
+
