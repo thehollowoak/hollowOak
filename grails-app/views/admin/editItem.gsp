@@ -7,8 +7,8 @@
             <g:textField class="form-control" name="name" value="${item.name}"/>
         </div>
         <div class="form-group">
-            <label for="img"> Image </label>
-            <g:textField class="form-control" name="img" value="${item.img}"/>
+            <label for="imgs"> Images </label>
+            <g:textField class="form-control" name="imgs" value="${pics}"/>
         </div>
         <div class="form-group">
             <label for="price"> Price </label>
