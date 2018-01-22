@@ -26,21 +26,24 @@ class AdminController {
      }
 
     def create() {
-        def item = new Item(name: params.name, price: params.price, description: params.description, forSale: true).save()
+        def forSale = params.forSale? true : false
+        def item = new Item(name: params.name, price: params.price, description: params.description, forSale: forSale).save()
         def imgs = params.img.split(', ')
         imgs.eachWithIndex { img, i ->
             new Pic(file: img, itemId: item.id, priority: i+1).save()
         }
-        redirect(controller: 'home', action: 'index')
+        redirect(controller: forSale? 'home' : 'project', action: 'index')
     }
 
     def deleteItem() {
-        Item.get(params.id).delete(flush: true)
+        def item = Item.get(params.id)
+        def forSale = item.forSale
+        item.delete(flush: true)
         def pics = Pic.findAllByItemId(params.id)
         pics.each {
             it.delete(flush: true)
         }
-        redirect(controller: 'home', action: 'index')
+        redirect(controller: forSale? 'home' : 'project', action: 'index')
     }
 
     def editItem() {
@@ -62,19 +65,12 @@ class AdminController {
         item.save(flush: true)
         updatePics(params.imgs, params.id)
         
-        redirect(controller: 'home', action: 'view', id: item.id)
+        redirect(controller: item.forSale? 'home' : 'project', action: 'view', id: item.id)
     }
-
-    def deactivateItem() {
-        def item = Item.get(params.id)
-        item.properties = [forSale: false]
-        item.save(flush: true)
-        redirect(controller: 'home', action: 'index')
-    }    
 
      def activateItem() {
         def item = Item.get(params.id)
-        item.properties = [forSale: true]
+        item.properties = [forSale: !item.forSale]
         item.save(flush: true)
         redirect(controller: 'home', action: 'index')
     } 
@@ -98,7 +94,6 @@ class AdminController {
                 pics[it].delete(flush: true)
             }
         }
-        
     }
 
 

@@ -29,7 +29,7 @@
             </div>
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
                 <ul class="nav navbar-nav">
-                    <li> <g:link controller="home" action="about"> About </g:link> </li>
+                    <li> <g:link controller="project" action="about"> About </g:link> </li>
                     <li> <g:link controller="project" action="index"> Projects </g:link> </li>
                     <li> <g:link controller="home" action="cart"> Cart </g:link> </li>
                     <g:if test="${session.admin}">
@@ -37,7 +37,7 @@
                         <g:if test="${item}">
                             <li> <g:link controller="admin" action="editItem" id="${item.id}"> Edit </g:link> </li>
                             <g:if test="${item.forSale}">
-                                <li> <g:link controller="admin" action="deactivateItem" id="${item.id}"> Deactivate </g:link> </li>
+                                <li> <g:link controller="admin" action="activateItem" id="${item.id}"> Deactivate </g:link> </li>
                             </g:if> <g:else>
                                 <li> <g:link controller="admin" action="activateItem" id="${item.id}"> Activate </g:link> </li>
                             </g:else>

@@ -18,6 +18,10 @@
             <label for="description"> Description </label>
             <g:textArea class="form-control" name="description"/>
         </div>
+        <div class="form-group">
+            <label for="forSale"> Active </label>
+            <g:checkBox name="forSale" value="${false}"/>
+        </div>
         <button type="submit" class="btn btn-primary"> Save </button>
     </g:form>
     </div>
