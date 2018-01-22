@@ -26,7 +26,7 @@ class AdminController {
      }
 
     def create() {
-        def item = new Item(name: params.name, price: params.price, description: params.description).save()
+        def item = new Item(name: params.name, price: params.price, description: params.description, forSale: true).save()
         def imgs = params.img.split(', ')
         imgs.eachWithIndex { img, i ->
             new Pic(file: img, itemId: item.id, priority: i+1).save()
@@ -63,7 +63,22 @@ class AdminController {
         updatePics(params.imgs, params.id)
         
         redirect(controller: 'home', action: 'view', id: item.id)
+    }
+
+    def deactivateItem() {
+        def item = Item.get(params.id)
+        item.properties = [forSale: false]
+        item.save(flush: true)
+        redirect(controller: 'home', action: 'index')
     }    
+
+     def activateItem() {
+        def item = Item.get(params.id)
+        item.properties = [forSale: true]
+        item.save(flush: true)
+        redirect(controller: 'home', action: 'index')
+    } 
+
 
     private def updatePics(imgString, itemId) {
         def imgs = imgString.split(', ')

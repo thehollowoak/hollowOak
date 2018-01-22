@@ -5,7 +5,7 @@ class HomeController {
     // Items
 
     def index() { 
-        def items = Item.findAll()
+        def items = Item.findAllByForSale(true)
         def pics = Pic.findAllByPriority(1)
         render(view: 'index', model: [items: items, pics: pics])
     }
@@ -16,9 +16,15 @@ class HomeController {
         render(view: 'view', model: [item: item, pics: pics])
     }
 
-    // About
+    // Not for sale
 
     def about() { }
+
+    def projects() {
+        def items = Item.findAllByForSale(false)
+        def pics = Pic.findAllByPriority(1)
+        render(view: 'index', model: [items: items, pics: pics])
+    }
 
     // Cart
 
