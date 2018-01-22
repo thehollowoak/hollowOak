@@ -16,16 +16,6 @@ class HomeController {
         render(view: 'view', model: [item: item, pics: pics])
     }
 
-    // Not for sale
-
-    def about() { }
-
-    def projects() {
-        def items = Item.findAllByForSale(false)
-        def pics = Pic.findAllByPriority(1)
-        render(view: 'index', model: [items: items, pics: pics])
-    }
-
     // Cart
 
     def cart() {

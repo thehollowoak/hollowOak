@@ -30,7 +30,7 @@
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
                 <ul class="nav navbar-nav">
                     <li> <g:link controller="home" action="about"> About </g:link> </li>
-                    <li> <g:link controller="home" action="projects"> Projects </g:link> </li>
+                    <li> <g:link controller="project" action="index"> Projects </g:link> </li>
                     <li> <g:link controller="home" action="cart"> Cart </g:link> </li>
                     <g:if test="${session.admin}">
                         <li> <g:link controller="admin" action="newItem"> New </g:link> </li>
