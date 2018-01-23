@@ -11,3 +11,8 @@ class Home
 #   button(:submit, :name => 'submit')
 end
 
+class View
+    include PageObject
+
+    h1(:title, :text => 'Test Item')
+end

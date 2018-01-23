@@ -16,7 +16,7 @@ class NewItem
     page_url "http://localhost:8080/admin/newItem"
 
     text_field(:name, :name => 'name')
-    text_field(:img, :name => 'img')
+    text_field(:imgs, :name => 'imgs')
     text_field(:price, :name => 'price')
     text_area(:description, :name => 'description')
     checkbox(:forSale, :name => 'forSale')

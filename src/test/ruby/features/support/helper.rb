@@ -2,7 +2,7 @@ def create_test_item
     visit_page NewItem
     on_page NewItem do |page|
         page.name = 'Test Item'
-        page.img = 'grails.svg'
+        page.imgs = 'grails.svg'
         page.price = '10'
         page.description = 'Test description'
         page.check_forSale
