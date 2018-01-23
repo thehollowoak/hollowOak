@@ -9,7 +9,7 @@
         </tr>
         <g:each var="item" in="${items}">
         <tr>
-            <td> ${item.name} </td>
+            <td> <g:link action="view" id="${item.id}"> ${item.name} </g:link> </td>
             <td> 
                 <g:link action="minusOne" id="${item.id}"> - </g:link>
                 ${session.items["${item.id}"]}
