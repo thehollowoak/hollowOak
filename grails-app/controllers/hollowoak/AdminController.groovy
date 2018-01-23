@@ -28,7 +28,7 @@ class AdminController {
     def create() {
         def forSale = params.forSale? true : false
         def item = new Item(name: params.name, price: params.price, description: params.description, forSale: forSale).save()
-        def imgs = params.img.split(', ')
+        def imgs = params.imgs.split(', ')
         imgs.eachWithIndex { img, i ->
             new Pic(file: img, itemId: item.id, priority: i+1).save()
         }
