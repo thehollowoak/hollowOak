@@ -7,12 +7,18 @@ class Home
 
   image(:test_img, :alt => 'Test Item')
   link(:delete, :text => 'Delete')
-#   text_field(:name, :id => 'entry_1000000')
-#   button(:submit, :name => 'submit')
+  link(:cart, :text => 'Cart')
 end
 
 class View
     include PageObject
 
     h1(:title, :text => 'Test Item')
+    link(:cart, :class => 'btn-primary')
+end
+
+class Cart
+    include PageObject
+
+    link(:item, :text => 'Test Item')
 end

@@ -8,9 +8,11 @@ Before do |scenario|
         page.password = PASS
         page.submit
     end
+    create_test_item
 end
 
 After do |scenario|
+    delete_test_item
     @browser.close
 end
 

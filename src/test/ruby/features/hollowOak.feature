@@ -8,3 +8,8 @@ Feature: Hollow Oak Website
     Given I'm on the home page
     When I click an item picture
     Then I should see that item's view page
+
+  Scenario: Add to cart
+    Given I'm on an item page
+    When I click 'add to cart'
+    Then the item will be in my cart
