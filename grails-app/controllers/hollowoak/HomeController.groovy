@@ -11,9 +11,12 @@ class HomeController {
     }
 
     def view() {
+        def items = Item.findAllByForSale(true)
+        def itemIds = items.collect { it.id }
         def item = Item.findById(params.id)
+        def index = itemIds.findIndexOf { "${it}" == params.id }
         def pics = Pic.findAllByItemId(params.id)
-        render(view: 'view', model: [item: item, pics: pics])
+        render(view: 'view', model: [item: item, pics: pics, itemIds: itemIds, index: index])
     }
 
     // Cart
