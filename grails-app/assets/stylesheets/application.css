@@ -66,6 +66,10 @@ img {
     padding: 10px;
 }
 
+.no-line:hover {
+    text-decoration: none
+}
+
 /* Forms */
 
 form {
