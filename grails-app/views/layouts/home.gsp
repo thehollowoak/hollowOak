@@ -31,7 +31,9 @@
                 <ul class="nav navbar-nav">
                     <li> <g:link controller="project" action="about"> About </g:link> </li>
                     <li> <g:link controller="project" action="index"> Projects </g:link> </li>
-                    <li> <g:link controller="home" action="cart"> Cart </g:link> </li>
+                    <li> <g:link controller="home" action="cart"> Cart 
+                        <g:if test="${session.items?.size() > 0}"> <span id="num-in-cart"> ${session.items.size()} </span> </g:if>
+                    </g:link> </li>
                     <g:if test="${session.admin}">
                         <li> <g:link controller="admin" action="newItem"> New </g:link> </li>
                         <g:if test="${item}">

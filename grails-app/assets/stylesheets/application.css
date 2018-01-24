@@ -38,6 +38,23 @@ h1, .center, .pic {
     background-color: #eee;
 }
 
+#num-in-cart {
+    background-color: red;
+    display: block;
+    height: 1.2em;
+    width: 1.2em;
+    line-height: 1.2em;
+    -moz-border-radius: 0.6em;
+    border-radius: 0.6em;
+
+    font-size: .5em;
+    color: white;
+    text-align: center;
+    position: relative; 
+    top: -2em;
+    left: 4em;
+}
+
 /* Pictures */
 
 .pic img {
