@@ -56,8 +56,15 @@ img {
     transition: .5s ease;
 }
 
+/* View */
+
 .viewPic {
     margin-bottom: 10px;
+}
+
+.img-btn {
+    height:30px;
+    width:30px;
 }
 
 /* Cart */
