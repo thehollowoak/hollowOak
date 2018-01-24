@@ -13,3 +13,8 @@ Feature: Hollow Oak Website
     Given I'm on an item page
     When I click 'add to cart'
     Then the item will be in my cart
+
+  Scenario: Deactivate Item
+    Given I'm on an item page
+    When I click 'deactivate'
+    Then the item will be in projects instead of home

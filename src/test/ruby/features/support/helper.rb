@@ -14,6 +14,8 @@ def delete_test_item
     visit_page Home
     on_page Home do |page|
         page.test_img_element.click
-        page.delete
+    end
+    on_page Nav do |nav|
+        nav.delete
     end
 end
