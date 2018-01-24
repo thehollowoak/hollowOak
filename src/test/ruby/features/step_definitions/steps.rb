@@ -1,4 +1,3 @@
-require 'page-object'
 include PageObject::PageFactory
 
 Given(/^there is an item in the database$/) do
