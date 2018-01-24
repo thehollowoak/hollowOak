@@ -28,6 +28,11 @@ end
 class Cart
     include PageObject
 
+    page_url "http://localhost:8080/home/cart"
+
     link(:item, :text => 'Test Item')
+    link(:minus, :text => '-')
+    link(:plus, :text => '+')
+    span(:amount, :class => 'amount')
 end
 

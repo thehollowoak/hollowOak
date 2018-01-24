@@ -23,7 +23,7 @@ end
 
 Then(/^I should see that item's view page$/) do
     on_page View do |page|
-        expect(page.title).to eq('Test Item')
+        expect(page.title).to eq 'Test Item'
     end
 end
 
@@ -59,5 +59,42 @@ Then(/^the item will be in projects instead of home$/) do
             page.test_img_element.click
             nav.activate
         end
+    end
+end
+
+
+Given(/^I put (\d+) of an item in the cart$/) do |amount|
+    on_page Home do |page|
+        page.test_img_element.click
+    end
+    on_page View do |page|
+        amount.times do
+            page.cart
+        end
+    end
+    visit_page Cart
+end
+
+When(/^I click the plus button$/) do
+    on_page Cart do |page|
+        page.plus
+    end
+end
+
+When(/^I click the minus button$/) do
+    on_page Cart do |page|
+        page.minus
+    end
+end
+
+Then(/^there ((is)|(are)) (\d+) of the item in the cart$/) do |ignore, amount|
+    on_page Cart do |page|
+        expect(page.amount).to eq "#{amount}"
+    end
+end
+
+Then(/^the item is no longer in the cart$/) do
+    on_page Cart do |page|
+        expect(page.item_element).not_to exist
     end
 end
