@@ -17,9 +17,9 @@ class BootStrap {
             'and covered with clear tape to prevent wear. The bag is about 10"x10"x2".'
         def majora_description = "It's Majora's Mask from Legond of Zelda. It's so cool."
 
-        def tardis = new Item(name: "Tardis Bag", price: 18, description: tardis_description, forSale: true).save()
         def bmo = new Item(name: "BMO Bag", price: 18, description: bmo_description, forSale: true).save()
         def trainer = new Item(name: "Pokemon Trainer Bag", price: 22, description: trainer_description, forSale: true).save()
+        def tardis = new Item(name: "Tardis Bag", price: 18, description: tardis_description, forSale: true).save()
         def cube = new Item(name: "Companion Cube Bag", price: 18, description: companion_description, forSale: true).save()
         def mask = new Item(name: "Majora's Mask Bag", price: 22, description: majora_description, forSale: true).save()
 

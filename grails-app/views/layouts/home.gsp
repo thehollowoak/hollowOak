@@ -29,6 +29,7 @@
             </div>
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
                 <ul class="nav navbar-nav">
+                    <li> <g:link controller="home" action="index"> Home </g:link> </li>
                     <li> <g:link controller="project" action="about"> About </g:link> </li>
                     <li> <g:link controller="project" action="index"> Projects </g:link> </li>
                     <li> <g:link controller="home" action="cart"> Cart 
