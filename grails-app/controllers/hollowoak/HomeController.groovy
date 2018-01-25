@@ -7,7 +7,7 @@ class HomeController {
     def index() { 
         def items = Item.findAllByForSale(true)
         def pics = Pic.findAllByPriority(1)
-        render(view: 'index', model: [items: items, pics: pics])
+        [items: items, pics: pics]
     }
 
     def view() {
@@ -16,21 +16,25 @@ class HomeController {
         def item = Item.findById(params.id)
         def index = itemIds.findIndexOf { "${it}" == params.id }
         def pics = Pic.findAllByItemId(params.id)
-        render(view: 'view', model: [item: item, pics: pics, itemIds: itemIds, index: index])
+        [item: item, pics: pics, itemIds: itemIds, index: index]
     }
 
-    def categories() { }
+    def categories() {
+        def cats = Category.findAll()
+        [categories: cats]
+    }
 
     def category() {
+        def cat = Category.findByName(params.title)
         def items
         if (params.for_sale == 'true') {
-            items = Item.findAllByForSaleAndCategory(true, params.title)
+            items = Item.findAllByForSaleAndCategory(true, cat.id)
         } 
         else {
-            items = Item.findAllByCategory(params.title)
+            items = Item.findAllByCategory(cat.id)
         }
         def pics = Pic.findAllByPriority(1)
-        render(view: 'category', model: [items: items, pics: pics, title: params.title, for_sale: params.for_sale])
+        [items: items, pics: pics, category: cat, for_sale: params.for_sale]
     }
 
     // Cart
@@ -38,7 +42,7 @@ class HomeController {
     def cart() {
         def items = Item.findAllByIdInList(session.items?.keySet())
         def totalPrice = getTotalPrice()
-        render(view: 'cart', model: [items: items, total: totalPrice])
+        [items: items, total: totalPrice]
     }
 
     def addToCart() {

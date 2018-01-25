@@ -1,13 +1,12 @@
 package hollowoak
 
-class Pic {
+class Category {
 
-    String file
-    Long itemId
-    int priority
+    String name
+    String meta
 
     static mapping = {
-        sort "priority"
+        sort "meta"
     }
 
     static constraints = {

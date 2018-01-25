@@ -27,17 +27,26 @@ class AdminController {
 
     def create() {
         def forSale = params.forSale? true : false
+        def category = Category.findByName(params.category)
+        if (!category) {
+            category = new Category(name: params.category, meta: params.meta).save(flush: true)
+        }
         def item = new Item(name: params.name, price: params.price, description: params.description, 
-            forSale: forSale, category: params.category).save()
+            forSale: forSale, category: category.id).save(flush: true)
         def imgs = params.imgs.split(', ')
         imgs.eachWithIndex { img, i ->
-            new Pic(file: img, itemId: item.id, priority: i+1).save()
+            new Pic(file: img, itemId: item.id, priority: i+1).save(flush: true)
         }
         redirect(controller: forSale? 'home' : 'project', action: 'index')
     }
 
     def deleteItem() {
         def item = Item.get(params.id)
+        Item[] items = Item.findAllByCategory(item.category)
+        if (items.size()<=1) {
+            def category = Category.get(item.category)
+            category.delete(flush: true)
+        }
         def forSale = item.forSale
         item.delete(flush: true)
         def pics = Pic.findAllByItemId(params.id)
@@ -52,18 +61,23 @@ class AdminController {
             redirect(controller: 'home', action: 'index')
         }
         def item = Item.get(params.id)
+        def category = Category.get(item.category)
         def pics = Pic.findAllByItemId(params.id)
         def string = ''
         pics.each { pic ->
             string += "${pic.file}, "
         }
-        render(view: 'editItem', model: [item: item, pics: string[0..-3]])
+        [item: item, pics: string[0..-3], category: category]
     }
 
     def update() {
         def item = Item.get(params.id)
+        def category = Category.findByNameAndMeta(params.category, params.meta)
+        if (!category) {
+            category = new Category(name: params.category, meta: params.meta).save(flush: true)
+        }
         item.properties = [name: params.name, price: params.price, description: params.description, 
-            category: params.cartegory]
+            category: category.id]
         item.save(flush: true)
         updatePics(params.imgs, params.id)
         

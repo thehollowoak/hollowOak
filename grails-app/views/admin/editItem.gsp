@@ -16,7 +16,11 @@
         </div>
         <div class="form-group">
             <label for="category"> Category </label>
-            <g:textField class="form-control" name="category" value="${item.category}"/>
+            <g:textField class="form-control" name="category" value="${category.name}"/>
+        </div>
+        <div class="form-group">
+            <label for="meta"> Meta Category </label>
+            <g:textField class="form-control" name="meta" value="${category.meta}"/>
         </div>
         <div class="form-group">
             <label for="description"> Description </label>

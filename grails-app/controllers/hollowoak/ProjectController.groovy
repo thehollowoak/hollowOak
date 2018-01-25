@@ -16,6 +16,6 @@ class ProjectController {
         def item = Item.findById(params.id)
         def index = itemIds.findIndexOf { "${it}" == params.id }
         def pics = Pic.findAllByItemId(params.id)
-        render(view: 'view', model: [item: item, pics: pics, itemIds: itemIds, index: index])
+        [item: item, pics: pics, itemIds: itemIds, index: index]
     }
 }

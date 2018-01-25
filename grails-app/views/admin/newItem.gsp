@@ -4,7 +4,7 @@
     <g:form action="create" method="POST">
         <div class="form-group">
             <label for="name"> Name </label>
-            <g:textField class="form-control" name="name"/>
+            <g:textField class="form-control" name="name" autofocus="true"/>
         </div>
         <div class="form-group">
             <label for="imgs"> Images </label>
@@ -17,6 +17,10 @@
         <div class="form-group">
             <label for="category"> Category </label>
             <g:textField class="form-control" name="category"/>
+        </div>
+        <div class="form-group">
+            <label for="meta"> Meta Category </label>
+            <g:textField class="form-control" name="meta"/>
         </div>
         <div class="form-group">
             <label for="description"> Description </label>

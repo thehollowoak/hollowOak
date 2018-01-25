@@ -17,11 +17,17 @@ class BootStrap {
             'and covered with clear tape to prevent wear. The bag is about 10"x10"x2".'
         def majora_description = "It's Majora's Mask from Legond of Zelda. It's so cool."
 
-        def bmo = new Item(name: "BMO Bag", price: 18, description: bmo_description, forSale: true, category: 'Adventure Time').save()
-        def trainer = new Item(name: "Pokemon Trainer Bag", price: 22, description: trainer_description, forSale: true, category: 'Pokemon').save()
-        def tardis = new Item(name: "Tardis Bag", price: 18, description: tardis_description, forSale: true, category: 'Doctor Who').save()
-        def cube = new Item(name: "Companion Cube Bag", price: 18, description: companion_description, forSale: true, category: 'Portal').save()
-        def mask = new Item(name: "Majora's Mask Bag", price: 22, description: majora_description, forSale: true, category: 'Legend of Zelda').save()
+        def at = new Category(name: 'Adventure Time', meta: 'Cartoons').save()
+        def poke = new Category(name: 'Pokemon', meta: 'Cartoons').save()
+        def dw = new Category(name: 'Doctor Who', meta: 'TV Shows').save()
+        def por = new Category(name: 'Portal', meta: 'Video Games').save()
+        def loz = new Category(name: 'Legend of Zelda', meta: 'Video Games').save()
+
+        def bmo = new Item(name: "BMO Bag", price: 18, description: bmo_description, forSale: true, category: at.id).save()
+        def trainer = new Item(name: "Pokemon Trainer Bag", price: 22, description: trainer_description, forSale: true, category: poke.id).save()
+        def tardis = new Item(name: "Tardis Bag", price: 18, description: tardis_description, forSale: true, category: dw.id).save()
+        def cube = new Item(name: "Companion Cube Bag", price: 18, description: companion_description, forSale: true, category: por.id).save()
+        def mask = new Item(name: "Majora's Mask Bag", price: 22, description: majora_description, forSale: true, category: loz.id).save()
 
         new Pic(file: "tardis_small.jpg", itemId: tardis.id, priority: 2).save()
         new Pic(file: "tardis_full.jpg", itemId: tardis.id, priority: 1).save()
@@ -29,7 +35,6 @@ class BootStrap {
         new Pic(file: "bmo.jpg", itemId: bmo.id, priority: 1).save()
         new Pic(file: "trainer.jpg", itemId: trainer.id, priority: 1).save()
         new Pic(file: "companion_cube.jpg", itemId: cube.id, priority: 1).save()
-
     }
     def destroy = {
     }

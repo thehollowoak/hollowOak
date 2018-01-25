@@ -4,7 +4,7 @@
     <g:form action="varify" method="POST">
         <div class="form-group">
             <label for="username"> Username </label>
-            <g:textField class="form-control" name="username"/>
+            <g:textField class="form-control" name="username" autofocus="true"/>
         </div>
         <div class="form-group">
             <label for="password"> Password </label>
