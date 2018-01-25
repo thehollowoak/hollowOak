@@ -112,3 +112,11 @@ form div {
     font-size: 1.3em;
     line-height: 70px;
 }
+
+.show-btn {
+    float: right;
+}
+
+#cat-title, .show-btn {
+    margin: 0px 15px;
+}
