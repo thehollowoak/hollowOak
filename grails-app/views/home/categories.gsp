@@ -3,10 +3,12 @@
     <h1> Categories </h1>
     <ul class="list-group">
     <g:set var="previous" value="${categories[0].meta}" />
-        <li class="list-group-item"> ${previous}
+        <li class="list-group-item"> 
+        <g:link action="meta" params='[title: "${previous}", for_sale: "true"]'> ${previous} </g:link>
     <g:each var="category" in="${categories}">
         <g:if test="${category.meta != previous}"> 
-            </li> <li class="list-group-item"> ${category.meta}
+            </li> <li class="list-group-item"> 
+            <g:link action="meta" params='[title: "${category.meta}", for_sale: "true"]'> ${category.meta} </g:link>
         </g:if>
             <ul>
                 <g:link action="category" params='[title: "${category.name}", for_sale: "true"]' 

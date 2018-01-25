@@ -37,6 +37,20 @@ class HomeController {
         [items: items, pics: pics, category: cat, for_sale: params.for_sale]
     }
 
+    def meta() {
+        def cats = Category.findAllByMeta(params.title)
+        def catIds = cats.collect { it.id }
+        def items
+        if (params.for_sale == 'true') {
+            items = Item.findAllByForSaleAndCategoryInList(true, catIds)
+        } 
+        else {
+            items = Item.findAllByCategoryInList(catIds)
+        }
+        def pics = Pic.findAllByPriority(1)
+        [items: items, pics: pics, meta: params.title, for_sale: params.for_sale]
+    }
+
     // Cart
 
     def cart() {
