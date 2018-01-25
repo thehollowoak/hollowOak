@@ -22,9 +22,15 @@ class HomeController {
     def categories() { }
 
     def category() {
-        def items = Item.findAllByForSaleAndCategory(true, params.title)
+        def items
+        if (params.for_sale == 'true') {
+            items = Item.findAllByForSaleAndCategory(true, params.title)
+        } 
+        else {
+            items = Item.findAllByCategory(params.title)
+        }
         def pics = Pic.findAllByPriority(1)
-        render(view: 'index', model: [items: items, pics: pics, title: params.title])
+        render(view: 'category', model: [items: items, pics: pics, title: params.title, for_sale: params.for_sale])
     }
 
     // Cart

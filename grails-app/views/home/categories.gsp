@@ -12,7 +12,7 @@
         <li class="list-group-item"> ${category.key}
             <ul>
             <g:each var="title" in="${category.value}">
-                <g:link controller="home" action="category" params='[title: "${title}"]' 
+                <g:link action="category" params='[title: "${title}", for_sale: "true"]' 
                     class="list-group-item list-group-item-action"> ${title} </g:link> 
             </g:each>
             </ul> 
