@@ -27,7 +27,8 @@ class AdminController {
 
     def create() {
         def forSale = params.forSale? true : false
-        def item = new Item(name: params.name, price: params.price, description: params.description, forSale: forSale).save()
+        def item = new Item(name: params.name, price: params.price, description: params.description, 
+            forSale: forSale, category: params.category).save()
         def imgs = params.imgs.split(', ')
         imgs.eachWithIndex { img, i ->
             new Pic(file: img, itemId: item.id, priority: i+1).save()
@@ -61,7 +62,8 @@ class AdminController {
 
     def update() {
         def item = Item.get(params.id)
-        item.properties = [name: params.name, price: params.price, description: params.description]
+        item.properties = [name: params.name, price: params.price, description: params.description, 
+            category: params.cartegory]
         item.save(flush: true)
         updatePics(params.imgs, params.id)
         

@@ -15,6 +15,10 @@
             <g:textField class="form-control" name="price"/>
         </div>
         <div class="form-group">
+            <label for="category"> Category </label>
+            <g:textField class="form-control" name="category"/>
+        </div>
+        <div class="form-group">
             <label for="description"> Description </label>
             <g:textArea class="form-control" name="description"/>
         </div>
