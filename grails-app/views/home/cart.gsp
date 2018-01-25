@@ -1,5 +1,5 @@
 <meta name="layout" content="home"/>
-<div class="row well well-lg cart">
+<div class="row well well-lg padding">
     <table class="table">
         <tr>
             <th> Item </th>

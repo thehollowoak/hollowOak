@@ -24,14 +24,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <g:link controller="home" action="index" class="navbar-brand"> The Hollow Oak </g:link>
+                <g:link controller="home" class="navbar-brand"> The Hollow Oak </g:link>
                 </a>
             </div>
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
                 <ul class="nav navbar-nav">
-                    <li> <g:link controller="home" action="index"> Home </g:link> </li>
+                    <li> <g:link controller="home"> Home </g:link> </li>
                     <li> <g:link controller="project" action="about"> About </g:link> </li>
-                    <li> <g:link controller="project" action="index"> Projects </g:link> </li>
+                    <li> <g:link controller="project"> Projects </g:link> </li>
+                    <li> <g:link controller="home" action="categories"> Categories </g:link> </li>
                     <li> <g:link controller="home" action="cart"> Cart 
                         <g:if test="${session.items?.size() > 0}"> <span id="num-in-cart"> ${session.items.size()} </span> </g:if>
                     </g:link> </li>

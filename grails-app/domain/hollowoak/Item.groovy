@@ -6,6 +6,7 @@ class Item {
     String description
     int price
     boolean forSale
+    String category
 
     static mapping = {
        description sqlType: 'text'

@@ -1,5 +1,6 @@
 <meta name="layout" content="home"/>
 <div class="row well well-lg">
+    <g:if test="${title}"> <h1> ${title} </h1> </g:if>
     <g:each var="col" in="[0,1,2]">
     <div class="col-sm-4">
         <g:set var="i" value="${col}"/>
