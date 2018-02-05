@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>
+        <g:layoutTitle default="The Hollow Oak"/>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+
+    <asset:stylesheet src="application.css"/>
+
+    <g:layoutHead/>
+</head>
+<body class="container">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <g:link controller="home" class="navbar-brand"> The Hollow Oak </g:link>
+                </a>
+            </div>
+            <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
+                <ul class="nav navbar-nav">
+                    <li> <g:link controller="home"> Home </g:link> </li>
+                    <li> <g:link controller="project" action="about"> About </g:link> </li>
+                    <li> <g:link controller="project"> Projects </g:link> </li>
+                    <li> <g:link controller="home" action="categories"> Categories </g:link> </li>
+                    <li> <g:link controller="home" action="cart"> Cart 
+                        <g:if test="${session.items?.size() > 0}"> <span id="num-in-cart"> ${session.items.size()} </span> </g:if>
+                    </g:link> </li>
+                    <g:if test="${session.admin}">
+                        <li> <g:link controller="admin" action="newItem"> New </g:link> </li>
+                        <g:if test="${item}">
+                            <li> <g:link controller="admin" action="editItem" id="${item.id}"> Edit </g:link> </li>
+                            <g:if test="${item.forSale}">
+                                <li> <g:link controller="admin" action="activateItem" id="${item.id}"> Deactivate </g:link> </li>
+                            </g:if> <g:else>
+                                <li> <g:link controller="admin" action="activateItem" id="${item.id}"> Activate </g:link> </li>
+                            </g:else>
+                            <li> <g:link controller="admin" action="deleteItem" id="${item.id}"> Delete </g:link> </li>
+                        </g:if>
+                        <li> <g:link controller="admin" action="logout"> Logout </g:link> </li>
+                    </g:if>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <g:layoutBody/>
+
+    <div class="footer" role="contentinfo"></div>
+
+    <div id="spinner" class="spinner" style="display:none;">
+        <g:message code="spinner.alt" default="Loading&hellip;"/>
+    </div>
+
+    <asset:javascript src="application.js"/>
+
+</body>
+</html>

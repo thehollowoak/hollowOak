@@ -2,20 +2,61 @@ package hollowoak
 
 class HomeController {
 
+    // Items
+
     def index() { 
-        def items = Item.findAll()
-        render(view: 'index', model: [items: items])
+        def items = Item.findAllByForSale(true)
+        def pics = Pic.findAllByPriority(1)
+        [items: items, pics: pics]
     }
 
     def view() {
+        def items = Item.findAllByForSale(true)
+        def itemIds = items.collect { it.id }
         def item = Item.findById(params.id)
-        render(view: 'view', model: [item: item])
+        def index = itemIds.findIndexOf { "${it}" == params.id }
+        def pics = Pic.findAllByItemId(params.id)
+        [item: item, pics: pics, itemIds: itemIds, index: index]
     }
+
+    def categories() {
+        def cats = Category.findAll()
+        [categories: cats]
+    }
+
+    def category() {
+        def cat = Category.findByName(params.title)
+        def items
+        if (params.for_sale == 'true') {
+            items = Item.findAllByForSaleAndCategory(true, cat.id)
+        } 
+        else {
+            items = Item.findAllByCategory(cat.id)
+        }
+        def pics = Pic.findAllByPriority(1)
+        [items: items, pics: pics, category: cat, for_sale: params.for_sale]
+    }
+
+    def meta() {
+        def cats = Category.findAllByMeta(params.title)
+        def catIds = cats.collect { it.id }
+        def items
+        if (params.for_sale == 'true') {
+            items = Item.findAllByForSaleAndCategoryInList(true, catIds)
+        } 
+        else {
+            items = Item.findAllByCategoryInList(catIds)
+        }
+        def pics = Pic.findAllByPriority(1)
+        [items: items, pics: pics, meta: params.title, for_sale: params.for_sale]
+    }
+
+    // Cart
 
     def cart() {
         def items = Item.findAllByIdInList(session.items?.keySet())
         def totalPrice = getTotalPrice()
-        render(view: 'cart', model: [items: items, total: totalPrice])
+        [items: items, total: totalPrice]
     }
 
     def addToCart() {
