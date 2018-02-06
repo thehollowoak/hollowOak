@@ -4,7 +4,7 @@
         <g:each var="row" in="${0..6}">
             <tr>
             <g:each var="col" in="${0..15}">
-                <td> </td>
+                <td> ${game.grid} </td>
             </g:each>
             </tr>
         </g:each>
