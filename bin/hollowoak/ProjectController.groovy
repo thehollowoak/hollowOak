@@ -18,4 +18,6 @@ class ProjectController {
         def pics = Pic.findAllByItemId(params.id)
         [item: item, pics: pics, itemIds: itemIds, index: index]
     }
+
+    def game() { }
 }

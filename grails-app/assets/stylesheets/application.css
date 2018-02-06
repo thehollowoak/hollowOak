@@ -103,6 +103,19 @@ form div {
     padding-bottom: 15px;
 }
 
+/* Game */
+
+.game-btn {
+    height:30px;
+    width:60px;
+}
+
+#game-table td {
+    border: 1px solid lightgray;
+    height:50px;
+    width:50px;
+}
+
 /* Fix Bootstrap */
 
 .navbar-brand {
