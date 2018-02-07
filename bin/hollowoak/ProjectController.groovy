@@ -19,5 +19,8 @@ class ProjectController {
         [item: item, pics: pics, itemIds: itemIds, index: index]
     }
 
-    def game() { }
+    def game() {
+        def game = new Game(grid: '#')
+        [game: game]
+     }
 }
