@@ -32,24 +32,40 @@ class Charactor {
         this.space = new Space(row, col, Symbol.CHARACTOR);
     }
     move(y, x) {
-        $("#row"+this.space.row+"col"+this.space.col).text(game.grid[this.space.row][this.space.col]);
-        this.space.row += y;
-        this.space.col += x;
-        $("#row"+this.space.row+"col"+this.space.col).text(Symbol.CHARACTOR);
+        if (game.grid[this.space.row+y][this.space.col+x] == Symbol.EMPTY) {
+            $("#row"+this.space.row+"col"+this.space.col).text(game.grid[this.space.row][this.space.col]);
+            this.space.row += y;
+            this.space.col += x;
+            $("#row"+this.space.row+"col"+this.space.col).text(Symbol.CHARACTOR);
+        }
+    }
+}
+
+class Ball {
+    constructor(row, col) {
+        this.space = new Space(row, col, Symbol.BALL);
+        this.color = "black";
+    }
+    setColor(color) {
+        this.color = color;
+        $("#row"+this.space.row+"col"+this.space.col).css("color", color);
     }
 }
 
 var Symbol = {
     EMPTY: " ",
     WALL: "#",
-    CHARACTOR: "&",
+    CHARACTOR: "(-‿-)",
+    BALL: "O",
   };
 
 $(document).ready(function(){
     game = new Game(6, 15);
     mc = new Charactor(1,1);
+    ball = new Ball(1, 5);
     $("button").click(function() {
-        mc.move(1,1); 
+        var color = $("textarea").val();
+        ball.setColor(color); 
     });
 });
 
