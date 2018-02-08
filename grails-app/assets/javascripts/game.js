@@ -1,4 +1,7 @@
 //= require jquery-2.2.0.min
+var game;
+var mc;
+
 class Game {
     constructor(rows, cols) {
         this.rows = rows;
@@ -28,17 +31,33 @@ class Charactor {
         this.symbol = '&';
         $("#row"+this.row+"col"+this.col).text('&');
     }
-    move() {
+    move(y, x) {
         $("#row"+this.row+"col"+this.col).text('.');
-        this.col += 1;
+        this.row += y;
+        this.col += x;
         $("#row"+this.row+"col"+this.col).text('&');
     }
 }
 
 $(document).ready(function(){
-    var game = new Game(6, 15);
-    var mc = new Charactor(1,1);
+    game = new Game(6, 15);
+    mc = new Charactor(1,1);
     $("button").click(function() {
-        mc.move();
+        mc.move(1,1);
     });
+});
+
+$(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: mc.move(0, -1); // left
+            break;
+        case 38: mc.move(-1, 0); // up
+            break;
+        case 39: mc.move(0, 1); // right
+            break;
+        case 40: mc.move(1, 0); // down
+            break;
+        default: return;
+    }
+    e.preventDefault();
 });
