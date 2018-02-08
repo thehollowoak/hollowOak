@@ -1,6 +1,7 @@
 //= require jquery-2.2.0.min
 var game;
 var mc;
+var ball;
 
 class Game {
     constructor(rows, cols) {
@@ -32,10 +33,14 @@ class Charactor {
         this.space = new Space(row, col, Symbol.CHARACTOR);
     }
     move(y, x) {
-        if (game.grid[this.space.row+y][this.space.col+x] == Symbol.EMPTY) {
+        var nextSpace = $("#row"+(this.space.row+y)+"col"+(this.space.col+x)).text();
+        if (nextSpace != Symbol.WALL) {
             $("#row"+this.space.row+"col"+this.space.col).text(game.grid[this.space.row][this.space.col]);
             this.space.row += y;
             this.space.col += x;
+            if (nextSpace == Symbol.BALL) {
+                ball.move(y, x);
+            }
             $("#row"+this.space.row+"col"+this.space.col).text(Symbol.CHARACTOR);
         }
     }
@@ -49,6 +54,18 @@ class Ball {
     setColor(color) {
         this.color = color;
         $("#row"+this.space.row+"col"+this.space.col).css("color", color);
+    }
+    move(y, x) {
+        if (game.grid[this.space.row+y][this.space.col+x] == Symbol.WALL) {
+            y = -y;
+            x = -x;
+        }
+        var currentColor = this.color;
+        this.setColor("");
+        ball.space.row += y;
+        ball.space.col += x;
+        this.setColor(currentColor);
+        $("#row"+ball.space.row+"col"+ball.space.col).text(Symbol.BALL);
     }
 }
 
