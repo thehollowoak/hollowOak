@@ -33,12 +33,12 @@ class Charactor {
         this.space = new Space(row, col, Symbol.CHARACTOR);
     }
     move(y, x) {
-        var nextSpace = $("#row"+(this.space.row+y)+"col"+(this.space.col+x)).text();
-        if (nextSpace != Symbol.WALL) {
+        var $nextSpace = $("#row"+(this.space.row+y)+"col"+(this.space.col+x)).text();
+        if ($nextSpace != Symbol.WALL) {
             $("#row"+this.space.row+"col"+this.space.col).text(game.grid[this.space.row][this.space.col]);
             this.space.row += y;
             this.space.col += x;
-            if (nextSpace == Symbol.BALL) {
+            if ($nextSpace == Symbol.BALL) {
                 ball.move(y, x);
             }
             $("#row"+this.space.row+"col"+this.space.col).text(Symbol.CHARACTOR);
@@ -52,19 +52,22 @@ class Ball {
         this.color = "black";
     }
     setColor(color) {
-        this.color = color;
-        $("#row"+this.space.row+"col"+this.space.col).css("color", color);
+        var $space = $("#row"+this.space.row+"col"+this.space.col);
+        var oldColor = $space.css("color");
+        $space.css("color", color)
+        if ($space.css("color") != oldColor) {
+            this.color = color;
+        }
     }
     move(y, x) {
         if (game.grid[this.space.row+y][this.space.col+x] == Symbol.WALL) {
             y = -y;
             x = -x;
         }
-        var currentColor = this.color;
-        this.setColor("");
+        $("#row"+this.space.row+"col"+this.space.col).css("color", "");
         ball.space.row += y;
         ball.space.col += x;
-        this.setColor(currentColor);
+        this.setColor(this.color);
         $("#row"+ball.space.row+"col"+ball.space.col).text(Symbol.BALL);
     }
 }
