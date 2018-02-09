@@ -47,12 +47,12 @@ class Charactor {
         this.space = new Space(row, col, Symbol.CHARACTOR, id);
     }
     move(y, x) {
-        var $nextSpace = $(this.space.getTdPlus(y,x)).text();
-        if ($nextSpace != Symbol.WALL) {
-            $(this.space.getTd()).text(game.getTile(this.space));
+        var $nextSpace = $(this.space.getTdPlus(y,x));
+        if ($nextSpace.html() != Symbol.WALL) {
+            $(this.space.getTd()).html(game.getTile(this.space));
             this.space.row += y;
             this.space.col += x;
-            if ($nextSpace == Symbol.BALL) {
+            if ($nextSpace.children().html() == Symbol.BALL) {
                 ball.move(y, x);
             }
             $(this.space.getTd()).html(this.space.html);
@@ -77,7 +77,7 @@ class Ball {
             y = -y;
             x = -x;
         }
-        $(this.space.getTd()).html("");
+        $(this.space.getTd()).html(game.getTile(this.space));
         this.space.row += y;
         this.space.col += x;
         $(this.space.getTd()).html(this.space.html);
@@ -88,8 +88,8 @@ class Ball {
 var Symbol = {
     EMPTY: " ",
     WALL: "#",
-    CHARACTOR: "(-‿-)",
-    BALL: "O",
+    CHARACTOR: "<span>(-‿-)</span>",
+    BALL: "<span>O</span>",
   };
 
 $(document).ready(function(){
