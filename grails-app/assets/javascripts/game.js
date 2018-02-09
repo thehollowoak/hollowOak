@@ -88,8 +88,8 @@ class Ball {
 var Symbol = {
     EMPTY: " ",
     WALL: "#",
-    CHARACTOR: "<span>(-‿-)</span>",
-    BALL: "<span>O</span>",
+    CHARACTOR: "(-‿-)",
+    BALL: "O",
   };
 
 $(document).ready(function(){
