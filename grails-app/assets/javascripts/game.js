@@ -58,7 +58,7 @@ class Charactor {
             $(this.space.getTd()).html(game.getTile(this.space));
             this.space.row += y;
             this.space.col += x;
-            if ($nextSpace.children().html() == Symbol.BALL) {
+            if (this.space.row == ball.space.row && this.space.col == ball.space.col) {
                 ball.move(y, x);
             }
             $(this.space.getTd()).html(this.space.html);
