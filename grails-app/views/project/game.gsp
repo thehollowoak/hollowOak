@@ -12,12 +12,12 @@
         </table>
     </div>
     <div class="col-lg-3 game-display">
-        <h3 id="title"> ball </h3>
-        <p id="class"> Class: Ball </p>
-        <p> Methods: </p>
-        <ul id="methods">
-            <li> setColor(color) </li>
-        </ul>
+        <div id="game-info">
+            <h3 id="name"></h3>
+            Class: <span id="class"></span> <br/>
+            Methods:
+            <ul id="methods"></ul>
+        </div>
     </div>
 </div>
 

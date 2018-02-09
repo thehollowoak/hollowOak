@@ -1,21 +1,31 @@
 <meta name="layout" content="home"/>
-<div class="row well well-lg padding">
-    <table id="game-table" class="text-center">
-        <g:each var="row" in="${0..<6}">
-            <tr>
-            <g:each var="col" in="${0..<15}">
-                <td id="row${row}col${col}"> </td>
+<div class="row well well-lg padding is-table-row">
+    <div class="col-lg-9">
+        <table id="game-table" class="text-center">
+            <g:each var="row" in="${0..<6}">
+                <tr>
+                <g:each var="col" in="${0..<15}">
+                    <td id="row${row}col${col}"> </td>
+                </g:each>
+                </tr>
             </g:each>
-            </tr>
-        </g:each>
-    </table>
+        </table>
+    </div>
+    <div class="col-lg-3 game-display">
+        <h3 id="title"> ball </h3>
+        <p id="class"> Class: Ball </p>
+        <p> Methods: </p>
+        <ul id="methods">
+            <li> setColor(color) </li>
+        </ul>
+    </div>
 </div>
 
-<div class="row well well-lg padding">
-    <div class="col col-sm-11">
+<div class="row well well-lg padding is-table-row">
+    <div class="col-sm-11">
         <textarea class="form-control"></textarea>
     </div>
-    <div class="col col-sm-1">
+    <div class="col-sm-1">
         <button type="button" class="btn btn-success game-btn"></button>
     </div>
 </div>

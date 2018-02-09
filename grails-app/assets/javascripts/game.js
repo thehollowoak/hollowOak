@@ -83,6 +83,10 @@ class Ball {
         $(this.space.getTd()).html(this.space.html);
         this.setColor(this.color);
     }
+    getMethods() {
+        //"new Ball(row, col, id)", 
+        return ["setColor(color)", "move(y, x)"]
+    }
 }
 
 var Symbol = {
@@ -99,6 +103,11 @@ $(document).ready(function(){
     $("button").click(function() {
         var color = $("textarea").val();
         ball.setColor(color); 
+    });
+    $("#name").text("ball");
+    $("#class").text("Ball");
+    ball.getMethods().forEach(element => {
+        $("#methods").append("<li>" + element + "</li>")
     });
 });
 
