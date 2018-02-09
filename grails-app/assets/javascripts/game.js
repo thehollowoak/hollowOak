@@ -23,6 +23,12 @@ class Game {
     getTilePlus(space, y, x) {
         return game.grid[space.row+y][space.col+x];
     }
+    display() {
+        if ($(mc.space.getTdPlus(0, 1)).children().attr('id') || $(mc.space.getTdPlus(0, -1)).children().attr('id')
+         || $(mc.space.getTdPlus(1, 0)).children().attr('id') || $(mc.space.getTdPlus(-1, 0)).children().attr('id')) {
+            $("#game-info").removeClass("hidden");
+        }
+    }
 }
 
 class Space {
@@ -56,6 +62,7 @@ class Charactor {
                 ball.move(y, x);
             }
             $(this.space.getTd()).html(this.space.html);
+            game.display();
         }
     }
 }

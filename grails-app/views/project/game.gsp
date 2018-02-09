@@ -12,7 +12,7 @@
         </table>
     </div>
     <div class="col-lg-3 game-display">
-        <div id="game-info">
+        <div id="game-info" class="hidden">
             <h3 id="name"></h3>
             Class: <span id="class"></span> <br/>
             Methods:
