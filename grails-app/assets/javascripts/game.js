@@ -17,6 +17,12 @@ class Game {
             }
         }
     }
+    getTile(space) {
+        return game.grid[space.row][space.col];
+    }
+    getTilePlus(space, y, x) {
+        return game.grid[space.row+y][space.col+x];
+    }
 }
 
 class Space {
@@ -31,6 +37,9 @@ class Space {
     getTd() {
         return "#row"+this.row+"col"+this.col;
     }
+    getTdPlus(y, x) {
+        return "#row"+(this.row+y)+"col"+(this.col+x);
+    }
 }
 
 class Charactor {
@@ -38,15 +47,15 @@ class Charactor {
         this.space = new Space(row, col, Symbol.CHARACTOR, id);
     }
     move(y, x) {
-        var $nextSpace = $("#row"+(this.space.row+y)+"col"+(this.space.col+x)).text();
+        var $nextSpace = $(this.space.getTdPlus(y,x)).text();
         if ($nextSpace != Symbol.WALL) {
-            $(this.space.getTd()).text(game.grid[this.space.row][this.space.col]);
+            $(this.space.getTd()).text(game.getTile(this.space));
             this.space.row += y;
             this.space.col += x;
             if ($nextSpace == Symbol.BALL) {
                 ball.move(y, x);
             }
-            $(this.space.getTd()).html(Symbol.CHARACTOR);
+            $(this.space.getTd()).html(this.space.html);
         }
     }
 }
@@ -57,11 +66,14 @@ class Ball {
         this.color = "black";
     }
     setColor(color) {
+        var oldColor = $("#" + this.space.id).css("color");
         $("#" + this.space.id).css("color", color)
-        this.color = color;
+        if ($("#" + this.space.id).css("color") != oldColor) {
+            this.color = color;
+        }
     }
     move(y, x) {
-        if (game.grid[this.space.row+y][this.space.col+x] == Symbol.WALL) {
+        if (game.getTilePlus(this.space, y, x) == Symbol.WALL) {
             y = -y;
             x = -x;
         }
