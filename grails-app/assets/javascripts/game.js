@@ -20,55 +20,56 @@ class Game {
 }
 
 class Space {
-    constructor(row, col, symbol) {
+    constructor(row, col, symbol, id) {
         this.row = row;
         this.col = col;
         this.symbol = symbol;
-        $("#row"+this.row+"col"+this.col).text(this.symbol);
+        this.id = id;
+        this.html = "<span id='" + id + "'>" + symbol + "</span>";
+        $(this.getTd()).html(this.html);
+    }
+    getTd() {
+        return "#row"+this.row+"col"+this.col;
     }
 }
 
 class Charactor {
-    constructor(row, col) {
-        this.space = new Space(row, col, Symbol.CHARACTOR);
+    constructor(row, col, id) {
+        this.space = new Space(row, col, Symbol.CHARACTOR, id);
     }
     move(y, x) {
         var $nextSpace = $("#row"+(this.space.row+y)+"col"+(this.space.col+x)).text();
         if ($nextSpace != Symbol.WALL) {
-            $("#row"+this.space.row+"col"+this.space.col).text(game.grid[this.space.row][this.space.col]);
+            $(this.space.getTd()).text(game.grid[this.space.row][this.space.col]);
             this.space.row += y;
             this.space.col += x;
             if ($nextSpace == Symbol.BALL) {
                 ball.move(y, x);
             }
-            $("#row"+this.space.row+"col"+this.space.col).text(Symbol.CHARACTOR);
+            $(this.space.getTd()).html(Symbol.CHARACTOR);
         }
     }
 }
 
 class Ball {
-    constructor(row, col) {
-        this.space = new Space(row, col, Symbol.BALL);
+    constructor(row, col, id) {
+        this.space = new Space(row, col, Symbol.BALL, id);
         this.color = "black";
     }
     setColor(color) {
-        var $space = $("#row"+this.space.row+"col"+this.space.col);
-        var oldColor = $space.css("color");
-        $space.css("color", color)
-        if ($space.css("color") != oldColor) {
-            this.color = color;
-        }
+        $("#" + this.space.id).css("color", color)
+        this.color = color;
     }
     move(y, x) {
         if (game.grid[this.space.row+y][this.space.col+x] == Symbol.WALL) {
             y = -y;
             x = -x;
         }
-        $("#row"+this.space.row+"col"+this.space.col).css("color", "");
-        ball.space.row += y;
-        ball.space.col += x;
+        $(this.space.getTd()).html("");
+        this.space.row += y;
+        this.space.col += x;
+        $(this.space.getTd()).html(this.space.html);
         this.setColor(this.color);
-        $("#row"+ball.space.row+"col"+ball.space.col).text(Symbol.BALL);
     }
 }
 
@@ -81,8 +82,8 @@ var Symbol = {
 
 $(document).ready(function(){
     game = new Game(6, 15);
-    mc = new Charactor(1,1);
-    ball = new Ball(1, 5);
+    mc = new Charactor(1,1,"mc");
+    ball = new Ball(1, 5,"ball");
     $("button").click(function() {
         var color = $("textarea").val();
         ball.setColor(color); 
