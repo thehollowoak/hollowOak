@@ -2,6 +2,7 @@
 var game;
 var mc;
 var ball;
+var gameObjects = new Map();
 
 class Game {
     constructor(rows, cols) {
@@ -24,9 +25,14 @@ class Game {
         return game.grid[space.row+y][space.col+x];
     }
     display() {
-        if ($(mc.space.getTdPlus(0, 1)).children().attr('id') || $(mc.space.getTdPlus(0, -1)).children().attr('id')
-         || $(mc.space.getTdPlus(1, 0)).children().attr('id') || $(mc.space.getTdPlus(-1, 0)).children().attr('id')) {
-            $("#game-info").removeClass("hidden");
+        var directions = [[0,1], [-1,0], [1,0], [0,-1]];
+        for (var d of directions) {
+            var id = $(mc.space.getTdPlus(d[0], d[1])).children().attr('id');
+            if (id) {
+                $("#game-info").removeClass("hidden");
+                gameObjects.get(id).displayInfo();
+                return;
+            }
         }
     }
 }
@@ -58,8 +64,11 @@ class Charactor {
             $(this.space.getTd()).html(game.getTile(this.space));
             this.space.row += y;
             this.space.col += x;
-            if (this.space.row == ball.space.row && this.space.col == ball.space.col) {
-                ball.move(y, x);
+            var charSpace = this.space;
+            for (var value of gameObjects.values()) {
+                if (charSpace.row == value.space.row && charSpace.col == value.space.col) {
+                    value.move(y, x);
+                }
             }
             $(this.space.getTd()).html(this.space.html);
             game.display();
@@ -71,6 +80,7 @@ class Ball {
     constructor(row, col, id) {
         this.space = new Space(row, col, Symbol.BALL, id);
         this.color = "black";
+        gameObjects.set(id, this);
     }
     setColor(color) {
         var oldColor = $("#" + this.space.id).css("color");
@@ -90,9 +100,14 @@ class Ball {
         $(this.space.getTd()).html(this.space.html);
         this.setColor(this.color);
     }
-    getMethods() {
-        //"new Ball(row, col, id)", 
-        return ["setColor(color)", "move(y, x)"]
+    displayInfo() {
+        $("#name").text(this.space.id);
+        $("#class").text("Ball"); //this.constructor.name
+        var methods = ["new Ball(row, col, id)", "setColor(color)", "move(y, x)"];
+        $("#methods").html("");
+        methods.forEach(element => {
+            $("#methods").append("<li>" + element + "</li>")
+        });
     }
 }
 
@@ -107,15 +122,10 @@ $(document).ready(function(){
     game = new Game(6, 15);
     mc = new Charactor(1,1,"mc");
     ball = new Ball(1, 5,"ball");
-    $("button").click(function() {
-        var color = $("textarea").val();
-        ball.setColor(color); 
-    });
-    $("#name").text("ball");
-    $("#class").text("Ball");
-    ball.getMethods().forEach(element => {
-        $("#methods").append("<li>" + element + "</li>")
-    });
+    // $("button").click(function() {
+    //     var color = $("textarea").val();
+    //     ball.setColor(color); 
+    // });
 });
 
 $(document).keydown(function(e) {
