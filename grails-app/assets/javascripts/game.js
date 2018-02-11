@@ -18,16 +18,13 @@ class Game {
             }
         }
     }
-    getTile(space) {
-        return game.grid[space.row][space.col];
-    }
-    getTilePlus(space, y, x) {
+    getTile(space, y=0, x=0) {
         return game.grid[space.row+y][space.col+x];
     }
     display() {
         var directions = [[0,1], [-1,0], [1,0], [0,-1]];
         for (var d of directions) {
-            var id = $(mc.space.getTdPlus(d[0], d[1])).children().attr('id');
+            var id = $(mc.space.getTd(d[0], d[1])).children().attr('id');
             if (id) {
                 $("#game-info").removeClass("hidden");
                 gameObjects.get(id).displayInfo();
@@ -46,10 +43,7 @@ class Space {
         this.html = "<span id='" + id + "'>" + symbol + "</span>";
         $(this.getTd()).html(this.html);
     }
-    getTd() {
-        return "#row"+this.row+"col"+this.col;
-    }
-    getTdPlus(y, x) {
+    getTd(y=0, x=0) {
         return "#row"+(this.row+y)+"col"+(this.col+x);
     }
 }
@@ -59,7 +53,7 @@ class Charactor {
         this.space = new Space(row, col, Symbol.CHARACTOR, id);
     }
     move(y, x) {
-        var $nextSpace = $(this.space.getTdPlus(y,x));
+        var $nextSpace = $(this.space.getTd(y,x));
         if ($nextSpace.html() != Symbol.WALL) {
             $(this.space.getTd()).html(game.getTile(this.space));
             this.space.row += y;
@@ -90,7 +84,7 @@ class Ball {
         }
     }
     move(y, x) {
-        if (game.getTilePlus(this.space, y, x) == Symbol.WALL) {
+        if (game.getTile(this.space, y, x) == Symbol.WALL) {
             y = -y;
             x = -x;
         }
