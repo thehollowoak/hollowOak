@@ -95,13 +95,20 @@ class Ball {
         this.setColor(this.color);
     }
     displayInfo() {
-        $("#name").text(this.space.id);
-        $("#class").text("Ball"); //this.constructor.name
-        var methods = ["new Ball(row, col, id)", "setColor(color)", "move(y, x)"];
-        $("#methods").html("");
-        methods.forEach(element => {
-            $("#methods").append("<li>" + element + "</li>")
-        });
+        if ($("#name").text() != this.space.id) {
+            $("#name").text(this.space.id);
+            $("#class").text("Ball"); //this.constructor.name
+            var properties = ["color", "row", "col"];
+            $("#properties").html("");
+            properties.forEach(element => {
+                $("#properties").append("<li>" + element + "</li>")
+            });
+            var methods = ["new Ball(row, col, id)", "setColor(color)", "move(y, x)"];
+            $("#methods").html("");
+            methods.forEach(element => {
+                $("#methods").append("<li>" + element + "</li>")
+            });
+        }
     }
 }
 
