@@ -117,6 +117,8 @@ form div {
 }
 
 .game-display {
+    font-size: 14pt;
+    padding-top: 7px;
     background-color: white;
     border: thin solid darkgray;
     height: 300px;

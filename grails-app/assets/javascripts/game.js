@@ -26,7 +26,6 @@ class Game {
         for (var d of directions) {
             var id = $(mc.getTd(d[0], d[1])).children().attr('id');
             if (id) {
-                $("#game-info").removeClass("hidden");
                 gameObjects.get(id).displayInfo();
                 return;
             }
@@ -101,6 +100,13 @@ class Ball extends Space {
             $("#methods").html("");
             methods.forEach(element => {
                 $("#methods").append("<li>" + element + "</li>")
+            });
+            var notes = ["? means the parameter is optional", "ID must be unique to other objects",
+                        "I recommend making the id the same as the variable name", 
+                        "If you forget the variable name, you can find an object with gameObjects.get(id)"];
+            $("#notes").html("");
+            notes.forEach(element => {
+                $("#notes").append("<li>" + element + "</li>")
             });
         }
     }
