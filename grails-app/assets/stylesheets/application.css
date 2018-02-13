@@ -118,6 +118,7 @@ form div {
 
 .game-display {
     background-color: white;
+    border: thin solid darkgray;
     height: 300px;
     overflow-y: auto;
 }

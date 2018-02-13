@@ -69,9 +69,9 @@ class Charactor extends Space {
 }
 
 class Ball extends Space {
-    constructor(row, col, id) {
+    constructor(id, color="black", row=1, col=1) {
         super(row, col, Symbol.BALL, id);
-        this.color = "black";
+        this.setColor(color);
         gameObjects.set(id, this);
     }
     setColor(color) {
@@ -97,7 +97,7 @@ class Ball extends Space {
             $("#name").text(this.id);
             $("#class").text("Ball"); //this.constructor.name
             $("#properties").html("<li> color, row, col, id, html </li>");
-            var methods = ["new Ball(row, col, id)", "setColor(color)", "move(y, x)"];
+            var methods = ["new Ball(id, color?, row?, col?)", "setColor(color)", "move(y, x)"];
             $("#methods").html("");
             methods.forEach(element => {
                 $("#methods").append("<li>" + element + "</li>")
@@ -116,7 +116,7 @@ var Symbol = {
 $(document).ready(function(){
     game = new Game(6, 15);
     mc = new Charactor(1,1,"mc");
-    ball = new Ball(1, 5,"ball");
+    ball = new Ball("ball","blue",1, 5);
     // $("button").click(function() {
     //     var color = $("textarea").val();
     //     ball.setColor(color); 
