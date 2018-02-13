@@ -24,7 +24,7 @@ class Game {
     display() {
         var directions = [[0,1], [-1,0], [1,0], [0,-1]];
         for (var d of directions) {
-            var id = $(mc.space.getTd(d[0], d[1])).children().attr('id');
+            var id = $(mc.getTd(d[0], d[1])).children().attr('id');
             if (id) {
                 $("#game-info").removeClass("hidden");
                 gameObjects.get(id).displayInfo();
@@ -38,7 +38,6 @@ class Space {
     constructor(row, col, symbol, id) {
         this.row = row;
         this.col = col;
-        this.symbol = symbol;
         this.id = id;
         this.html = "<span id='" + id + "'>" + symbol + "</span>";
         $(this.getTd()).html(this.html);
@@ -48,61 +47,56 @@ class Space {
     }
 }
 
-class Charactor {
+class Charactor extends Space {
     constructor(row, col, id) {
-        this.space = new Space(row, col, Symbol.CHARACTOR, id);
+        super(row, col, Symbol.CHARACTOR, id);
     }
     move(y, x) {
-        var $nextSpace = $(this.space.getTd(y,x));
+        var $nextSpace = $(this.getTd(y,x));
         if ($nextSpace.html() != Symbol.WALL) {
-            $(this.space.getTd()).html(game.getTile(this.space));
-            this.space.row += y;
-            this.space.col += x;
-            var charSpace = this.space;
+            $(this.getTd()).html(game.getTile(this));
+            this.row += y;
+            this.col += x;
             for (var value of gameObjects.values()) {
-                if (charSpace.row == value.space.row && charSpace.col == value.space.col) {
+                if (this.row == value.row && this.col == value.col) {
                     value.move(y, x);
                 }
             }
-            $(this.space.getTd()).html(this.space.html);
+            $(this.getTd()).html(this.html);
             game.display();
         }
     }
 }
 
-class Ball {
+class Ball extends Space {
     constructor(row, col, id) {
-        this.space = new Space(row, col, Symbol.BALL, id);
+        super(row, col, Symbol.BALL, id);
         this.color = "black";
         gameObjects.set(id, this);
     }
     setColor(color) {
-        var oldColor = $("#" + this.space.id).css("color");
-        $("#" + this.space.id).css("color", color)
-        if ($("#" + this.space.id).css("color") != oldColor) {
+        var oldColor = $("#" + this.id).css("color");
+        $("#" + this.id).css("color", color)
+        if ($("#" + this.id).css("color") != oldColor) {
             this.color = color;
         }
     }
     move(y, x) {
-        if (game.getTile(this.space, y, x) == Symbol.WALL) {
+        if (game.getTile(this, y, x) == Symbol.WALL) {
             y = -y;
             x = -x;
         }
-        $(this.space.getTd()).html(game.getTile(this.space));
-        this.space.row += y;
-        this.space.col += x;
-        $(this.space.getTd()).html(this.space.html);
+        $(this.getTd()).html(game.getTile(this));
+        this.row += y;
+        this.col += x;
+        $(this.getTd()).html(this.html);
         this.setColor(this.color);
     }
     displayInfo() {
-        if ($("#name").text() != this.space.id) {
-            $("#name").text(this.space.id);
+        if ($("#name").text() != this.id) {
+            $("#name").text(this.id);
             $("#class").text("Ball"); //this.constructor.name
-            var properties = ["color", "row", "col"];
-            $("#properties").html("");
-            properties.forEach(element => {
-                $("#properties").append("<li>" + element + "</li>")
-            });
+            $("#properties").html("<li> color, row, col, id, html </li>");
             var methods = ["new Ball(row, col, id)", "setColor(color)", "move(y, x)"];
             $("#methods").html("");
             methods.forEach(element => {
