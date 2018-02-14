@@ -22,13 +22,14 @@
                 Like this: ball.color </li>
             <li> To change the color of the ball, you can use the method setColor, like this: ball.setColor('green'). 
                 What colors can you make the ball? What happens if you set it to something that is not a color? </li>
-            <li> To move the ball, you need to pass into the method a direction. Direction is an enum containing RIGHT, LEFT, UP, and DOWN. 
-                Use it like this: ball.move(Direction.UP). What happens when you move the ball onto a wall? Onto the character? </li> 
+            <li> To move the ball, you need to pass it two numbers, represented by 'y' and 'x'. Use it like this: ball.move(1, 0). 
+                What direction does that move it?. What happens when you try to move it onto a wall? Onto the character? </li> 
             <li> You can create another ball using 'new Ball'. When creating a new object, you should save it in a variable so you can 
                 interact with it again. Like this: ball2 = new Ball('ball2') </li>
-            <li> The id must be unique to other objects, and I recommend making it the same as the variable name. </li>
-            <li> ? means the parameter is optional. When making a new ball, you can specify a starting color and position, but you don't have to. </li> 
-            <li> If you don't know a variable name, typing gameObjects will list all the game objects. </li>
+            <li> The ID must be unique to other objects, and I recommend making it the same as the variable name. </li>
+            <li> ? means the parameter is optional. When making a new ball, you can specify a color and position, but you don't have to. </li> 
+            <li> If you don't know a variable name, typing gameObjects will list all the game objects with their IDs. </li>
+            <li> The character also has a move method similar to the ball. Their variable name is 'mc', for main character. <li>
         </ul>
         </div>
     </div>

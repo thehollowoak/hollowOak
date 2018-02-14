@@ -86,14 +86,14 @@ class Charactor extends Space {
     constructor(row, col, id) {
         super(row, col, Symbol.CHARACTOR, id);
     }
-    move(direction) {
-        if (game.getTile(this, direction.Y, direction.X) != Symbol.WALL) {
+    move(y, x) {
+        if (game.getTile(this, y, x) != Symbol.WALL) {
             $(game.getTd(this)).html(game.getTile(this));
-            this.row += direction.Y;
-            this.col += direction.X;
+            this.row += y;
+            this.col += x;
             for (var value of gameObjects.values()) {
                 if (this.row == value.row && this.col == value.col) {
-                    value.move(direction);
+                    value.move(y, x);
                 }
             }
             game.updateOffset();
@@ -117,25 +117,27 @@ class Ball extends Space {
             this.color = color;
         }
     }
-    move(direction) {
-        var newDirection = direction;
-        if (game.getTile(this, direction.Y, direction.X) == Symbol.WALL) {
-            newDirection = { Y: -direction.Y, X: -direction.X };
+    move(y, x) {
+        if (game.getTile(this, y, x) == Symbol.WALL) {
+           y = -y;
+           x = -x;
         }
         for (var value of gameObjects.values()) {
-            if (this.row+newDirection.Y == value.row && this.col+newDirection.X == value.col) {
-                var sideDirection = { Y: direction.X, X: direction.Y };
+            if (this.row+y == value.row && this.col+x == value.col) {
+                var yy = x;
+                var xx = y;
                 for (var value2 of gameObjects.values()) {
-                    if (value.row+sideDirection.Y == value2.row && value.col+sideDirection.X == value2.col) {
-                        sideDirection = { Y: -direction.X, X: -direction.Y };
+                    if (value.row+yy == value2.row && value.col+xx == value2.col) {
+                        yy = -yy;
+                        xx = -xx;
                     }
                 }
-                value.move(sideDirection);
+                value.move(yy, xx);
             }
         }
         $(game.getTd(this)).html(game.getTile(this));
-        this.row += newDirection.Y;
-        this.col += newDirection.X;
+        this.row += y;
+        this.col += x;
         $(game.getTd(this)).html(this.html);
         this.setColor(this.color);
     }
@@ -144,7 +146,7 @@ class Ball extends Space {
             $("#name").text(this.id);
             $("#class").text("Ball"); //this.constructor.name
             $("#properties").html("<li> color, row, col, id, html </li>");
-            var methods = ["new Ball(id, color?, row?, col?)", "setColor(color)", "move(direction)"];
+            var methods = ["new Ball(id, color?, row?, col?)", "setColor(color)", "move(y, x)"];
             $("#methods").html("");
             methods.forEach(element => {
                 $("#methods").append("<li>" + element + "</li>")
@@ -160,13 +162,6 @@ const Symbol = {
     BALL: "O",
   };
 
-const Direction = {
-    RIGHT: { Y: 0, X: 1 },
-    LEFT: { Y: 0, X: -1 },
-    UP: { Y: -1, X: 0 },
-    DOWN: { Y: 1, X: 0 },
-}
-
 var ball;
 var trappedBall;
 $(document).ready(function(){
@@ -174,21 +169,17 @@ $(document).ready(function(){
     mc = new Charactor( 1, 1, "mc");
     ball = new Ball("ball","blue", 1, 5);
     trappedBall = new Ball("trappedBall","red", 5, 6);
-    // $("button").click(function() {
-    //     var color = $("textarea").val();
-    //     ball.setColor(color); 
-    // });
 });
 
 $(document).keydown(function(e) {
     switch(e.which) {
-        case 37: mc.move(Direction.LEFT); // left
+        case 37: mc.move(0, -1); // left
             break;
-        case 38: mc.move(Direction.UP); // up
+        case 38: mc.move(-1, 0); // up
             break;
-        case 39: mc.move(Direction.RIGHT); // right
+        case 39: mc.move(0, 1); // right
             break;
-        case 40: mc.move(Direction.DOWN); // down
+        case 40: mc.move(1, 0); // down
             break;
         default: return;
     }
