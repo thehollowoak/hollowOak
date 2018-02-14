@@ -1,4 +1,6 @@
 //= require jquery-2.2.0.min
+const VIEW_HEIGHT = 6;
+const VIEW_WIDTH = 15;
 var game;
 var mc;
 var ball;
@@ -8,6 +10,7 @@ class Game {
     constructor(rows, cols) {
         this.rows = rows;
         this.cols = cols;
+        this.offset = { y: 0, x: 0 };
         this.grid = new Array(rows);
         for(var row = 0; row < this.rows; row++) {
             this.grid[row] = new Array(cols);
@@ -15,16 +18,43 @@ class Game {
                 var symbol = (row == 0 || row == this.rows-1 || col == 0 || col == this.cols-1 ? Symbol.WALL : Symbol.EMPTY);
                 this.grid[row][col] = symbol;
                 $("#row"+row+"col"+col).text(symbol);
+                //$("#row"+(row-this.offset.y)+"col"+(col-this.offset.x)).text(symbol);
             }
+        }
+    }
+    updateOffset() {
+        var oldOffset = { y: this.offset.y, x: this.offset.x };
+
+        if (mc.row-this.offset.y <= 2 && this.offset.y > 0) { this.offset.y-- }
+        if (mc.row-this.offset.y >= VIEW_HEIGHT-2 && this.offset.y < this.rows-VIEW_HEIGHT) { this.offset.y++ }
+        if (mc.col-this.offset.x <= 2 && this.offset.x > 0) { this.offset.x-- }
+        if (mc.col-this.offset.x >= VIEW_WIDTH-2 && this.offset.x < this.cols-VIEW_WIDTH) { this.offset.x++ }
+
+        if (oldOffset.x != this.offset.x || oldOffset.y != this.offset.y) {
+            this.updateDisplay();
+        }
+    }
+    updateDisplay() {
+        for(var row = 0; row < VIEW_HEIGHT; row++) {
+            for(var col = 0; col < VIEW_WIDTH; col++) {
+                $("#row"+row+"col"+col).text(this.grid[row+this.offset.y][col+this.offset.x]);
+            }
+        }
+        for(var value of gameObjects.values()) {
+            $(game.getTd(value)).html(value.html);
+            value.setColor(value.color);
         }
     }
     getTile(space, y=0, x=0) {
         return game.grid[space.row+y][space.col+x];
     }
-    display() {
+    getTd(space, y=0, x=0) {
+        return "#row"+(space.row+y-this.offset.y)+"col"+(space.col+x-this.offset.x);
+    }
+    objectInfo() {
         var directions = [[0,1], [-1,0], [1,0], [0,-1]];
         for (var d of directions) {
-            var id = $(mc.getTd(d[0], d[1])).children().attr('id');
+            var id = $(this.getTd(mc, d[0], d[1])).children().attr('id');
             if (id) {
                 gameObjects.get(id).displayInfo();
                 return;
@@ -39,10 +69,7 @@ class Space {
         this.col = col;
         this.id = id;
         this.html = "<span id='" + id + "'>" + symbol + "</span>";
-        $(this.getTd()).html(this.html);
-    }
-    getTd(y=0, x=0) {
-        return "#row"+(this.row+y)+"col"+(this.col+x);
+        $(game.getTd(this)).html(this.html);
     }
 }
 
@@ -51,9 +78,8 @@ class Charactor extends Space {
         super(row, col, Symbol.CHARACTOR, id);
     }
     move(direction) {
-        var $nextSpace = $(this.getTd(direction.Y,direction.X));
-        if ($nextSpace.html() != Symbol.WALL) {
-            $(this.getTd()).html(game.getTile(this));
+        if (game.getTile(this, direction.Y, direction.X) != Symbol.WALL) {
+            $(game.getTd(this)).html(game.getTile(this));
             this.row += direction.Y;
             this.col += direction.X;
             for (var value of gameObjects.values()) {
@@ -61,8 +87,9 @@ class Charactor extends Space {
                     value.move(direction);
                 }
             }
-            $(this.getTd()).html(this.html);
-            game.display();
+            game.updateOffset();
+            $(game.getTd(this)).html(this.html);
+            game.objectInfo();
         }
     }
 }
@@ -70,6 +97,7 @@ class Charactor extends Space {
 class Ball extends Space {
     constructor(id, color="black", row=1, col=1) {
         super(row, col, Symbol.BALL, id);
+        this.color = color;
         this.setColor(color);
         gameObjects.set(id, this);
     }
@@ -96,10 +124,10 @@ class Ball extends Space {
                 value.move(sideDirection);
             }
         }
-        $(this.getTd()).html(game.getTile(this));
+        $(game.getTd(this)).html(game.getTile(this));
         this.row += newDirection.Y;
         this.col += newDirection.X;
-        $(this.getTd()).html(this.html);
+        $(game.getTd(this)).html(this.html);
         this.setColor(this.color);
     }
     displayInfo() {
@@ -139,8 +167,8 @@ const Direction = {
 }
 
 $(document).ready(function(){
-    game = new Game(6, 15);
-    mc = new Charactor(1,1,"mc");
+    game = new Game(10, 17);
+    mc = new Charactor(3,3,"mc");
     ball = new Ball("ball","blue",1, 5);
     // $("button").click(function() {
     //     var color = $("textarea").val();
