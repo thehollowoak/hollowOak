@@ -1,9 +1,8 @@
 //= require jquery-2.2.0.min
-const VIEW_HEIGHT = 6;
-const VIEW_WIDTH = 15;
+const VIEW_HEIGHT = 7;
+const VIEW_WIDTH = 17;
 var game;
 var mc;
-var ball;
 var gameObjects = new Map();
 var map = ["#################",
            "#.......#.......#",
@@ -150,14 +149,6 @@ class Ball extends Space {
             methods.forEach(element => {
                 $("#methods").append("<li>" + element + "</li>")
             });
-            var notes = ["Direction is an enum containing RIGHT, LEFT, UP, and DOWN. Use it like this: ball.move(Direction.UP)", 
-                        "? means the parameter is optional", "ID must be unique to other objects",
-                        "I recommend making the id the same as the variable name", 
-                        "If you don't know a variable name, typing gameObjects will list all the game objects"];
-            $("#notes").html("");
-            notes.forEach(element => {
-                $("#notes").append("<li>" + element + "</li>")
-            });
         }
     }
 }
@@ -176,11 +167,13 @@ const Direction = {
     DOWN: { Y: 1, X: 0 },
 }
 
+var ball;
+var trappedBall;
 $(document).ready(function(){
     game = new Game(10, 17);
     mc = new Charactor( 1, 1, "mc");
     ball = new Ball("ball","blue", 1, 5);
-    ball2 = new Ball("ball2","red", 5, 6);
+    trappedBall = new Ball("trappedBall","red", 5, 6);
     // $("button").click(function() {
     //     var color = $("textarea").val();
     //     ball.setColor(color); 
