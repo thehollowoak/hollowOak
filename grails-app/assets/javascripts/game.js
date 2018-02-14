@@ -5,6 +5,16 @@ var game;
 var mc;
 var ball;
 var gameObjects = new Map();
+var map = ["#################",
+           "#.......#.......#",
+           "#..##...#..##...#",
+           "###....##..###...",
+           "#....##.#...#####",
+           "#..###..##....###",
+           "#...##..####....#",
+           "##..#####..##..##",
+           "##............###",
+           "#################"];
 
 class Game {
     constructor(rows, cols) {
@@ -15,7 +25,7 @@ class Game {
         for(var row = 0; row < this.rows; row++) {
             this.grid[row] = new Array(cols);
             for(var col = 0; col < this.cols; col++) {
-                var symbol = (row == 0 || row == this.rows-1 || col == 0 || col == this.cols-1 ? Symbol.WALL : Symbol.EMPTY);
+                var symbol = map[row].charAt(col) == '#' ? Symbol.WALL : Symbol.EMPTY;
                 this.grid[row][col] = symbol;
                 $("#row"+row+"col"+col).text(symbol);
                 //$("#row"+(row-this.offset.y)+"col"+(col-this.offset.x)).text(symbol);
@@ -143,7 +153,7 @@ class Ball extends Space {
             var notes = ["Direction is an enum containing RIGHT, LEFT, UP, and DOWN. Use it like this: ball.move(Direction.UP)", 
                         "? means the parameter is optional", "ID must be unique to other objects",
                         "I recommend making the id the same as the variable name", 
-                        "If you forget the variable name, you can find an object with gameObjects.get(id)"];
+                        "If you don't know a variable name, typing gameObjects will list all the game objects"];
             $("#notes").html("");
             notes.forEach(element => {
                 $("#notes").append("<li>" + element + "</li>")
@@ -155,7 +165,7 @@ class Ball extends Space {
 const Symbol = {
     EMPTY: " ",
     WALL: "#",
-    CHARACTOR: "(-‿-)",
+    CHARACTOR: "(-_-)", //'<svg height="32" viewBox="0 0 16 16" width="32"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>',
     BALL: "O",
   };
 
@@ -168,8 +178,9 @@ const Direction = {
 
 $(document).ready(function(){
     game = new Game(10, 17);
-    mc = new Charactor(3,3,"mc");
-    ball = new Ball("ball","blue",1, 5);
+    mc = new Charactor( 1, 1, "mc");
+    ball = new Ball("ball","blue", 1, 5);
+    ball2 = new Ball("ball2","red", 5, 6);
     // $("button").click(function() {
     //     var color = $("textarea").val();
     //     ball.setColor(color); 
